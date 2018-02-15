@@ -19,6 +19,10 @@
             {
               "xml": "<preference name=\"StatusBarStyle\" value=\"lightcontent\" />",
               "count": 1
+            },
+            {
+              "xml": "<feature name=\"Device\"><param name=\"ios-package\" value=\"CDVDevice\" /></feature>",
+              "count": 1
             }
           ]
         }
@@ -27,6 +31,9 @@
   },
   "installed_plugins": {
     "cordova-plugin-statusbar": {
+      "PACKAGE_NAME": "com.gmarkham.com"
+    },
+    "cordova-plugin-device": {
       "PACKAGE_NAME": "com.gmarkham.com"
     }
   },
@@ -39,9 +46,18 @@
       "clobbers": [
         "window.StatusBar"
       ]
+    },
+    {
+      "id": "cordova-plugin-device.device",
+      "file": "plugins/cordova-plugin-device/www/device.js",
+      "pluginId": "cordova-plugin-device",
+      "clobbers": [
+        "device"
+      ]
     }
   ],
   "plugin_metadata": {
-    "cordova-plugin-statusbar": "2.4.1"
+    "cordova-plugin-statusbar": "2.4.1",
+    "cordova-plugin-device": "2.0.1"
   }
 }

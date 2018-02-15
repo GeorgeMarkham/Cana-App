@@ -5,23 +5,29 @@ function alertCB(){
     //Do Nothing!
 }
 
-
 function deviceReady(){
     console.log("Device ready!");
+    function alertDismissed() {
+        // do something
+    }
+    
     navigator.notification.alert(
-        "Device is now ready!",
-        alertCB(),
-        "Device Status",
-        "Great!"
+        'You are the winner!',  // message
+        alertDismissed,         // callback
+        'Game Over',            // title
+        'Done'                  // buttonName
     );
 
     $("#loginBtn").on('click', (e)=>{
+        function alertDismissed() {
+            // do something
+        }
+        
         navigator.notification.alert(
-            "Login Button clicked!",
-            alertCB(),
-            "Login Button",
-            "Great!"
+            'You are the winner!',  // message
+            alertDismissed,         // callback
+            'Game Over',            // title
+            'Done'                  // buttonName
         );
     });
-    
 }

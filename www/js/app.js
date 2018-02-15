@@ -1,4 +1,4 @@
-document.addEventListener('deviceready', onDeviceReady(), false);
+document.addEventListener('deviceready', deviceReady(), false);
 
 
 function alertCB(){
@@ -6,7 +6,8 @@ function alertCB(){
 }
 
 
-function onDeviceReady(){
+function deviceReady(){
+    console.log("Device ready!");
     navigator.notification.alert(
         "Device is now ready!",
         alertCB(),

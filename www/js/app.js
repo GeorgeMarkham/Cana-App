@@ -7,7 +7,7 @@ function alertCB(){
 
 
 function onDeviceReady(){
-    navigator.notification(
+    navigator.notification.alert(
         "Device is now ready!",
         alertCB(),
         "Device Status",

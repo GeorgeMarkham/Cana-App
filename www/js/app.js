@@ -13,5 +13,15 @@ function deviceReady(){
         alertCB(),
         "Device Status",
         "Great!"
-    )
+    );
+
+    $("#loginBtn").on('click', (e)=>{
+        navigator.notification.alert(
+            "Login Button clicked!",
+            alertCB(),
+            "Login Button",
+            "Great!"
+        );
+    });
+    
 }

@@ -1,0 +1,18 @@
+{
+  "background_color": "#FFF",
+  "display": "standalone",
+  "name": "HereBy",
+  "short_name": "HereBy",
+  "version": "com.gmarkham.com",
+  "description": "HereBy is an app to help you hang out with your friends!",
+  "author": "George Markham",
+  "icons": [
+    {
+      "src": "www/icon.png",
+      "type": "image/png",
+      "sizes": "undefinedxundefined"
+    }
+  ],
+  "start_url": "index.html",
+  "theme_color": "#F0FF49"
+}

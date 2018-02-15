@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.gmarkham.com" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:gap="http://phonegap.com/ns/1.0">
+    <name>HereBy</name>
+    <description>
+        HereBy is an app to help you hang out with your friends!
+    </description>
+    <author email="markhamg7@gmail.com" href="http://blog.gmarkham.com">
+        George Markham
+    </author>
+    <content src="index.html" />
+    <icon src="www/icon.png" />
+    <splash src="www/splash.png" />
+    <access origin="*" />
+    <preference name="DisallowOverscroll" value="true" />
+    <preference name="StatusBarBackgroundColor" value="#F0FF49" />
+    <preference name="StatusBarStyle" value="default" />
+</widget>

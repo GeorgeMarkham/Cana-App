@@ -28,6 +28,17 @@ button{
     margin: 0;
     background-color: #F0FF49;
 }
+#signup_page{
+    height: 100%;
+    margin: 0;
+    color:#FFFFFF;
+    background-color: #3B86CC;
+}
+#signup_page header h1{
+    text-align: center;
+    color: #FFFFFF;
+    font-size: 5em;
+}
 #login_btn{
     background: #FF3B30;
     color:#ffffff;

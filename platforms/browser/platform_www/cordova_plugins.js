@@ -43,6 +43,14 @@ module.exports = [
         "merges": [
             "navigator.notification"
         ]
+    },
+    {
+        "file": "plugins/cordova-sqlite-storage/www/SQLitePlugin.js",
+        "id": "cordova-sqlite-storage.SQLitePlugin",
+        "pluginId": "cordova-sqlite-storage",
+        "clobbers": [
+            "SQLitePlugin"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -50,7 +58,8 @@ module.exports.metadata =
 {
     "cordova-plugin-statusbar": "2.4.1",
     "cordova-plugin-device": "2.0.1",
-    "cordova-plugin-dialogs": "2.0.1"
+    "cordova-plugin-dialogs": "2.0.1",
+    "cordova-sqlite-storage": "2.2.1"
 }
 // BOTTOM OF METADATA
 });

@@ -21,9 +21,15 @@ function deviceReady(){
 
         $.post('http://localhost:8080/signup', data, (data, status)=>{
             if(status == 'success' && data.success == true){
-                var token = data.token;
+                var db = window.sqlitePlugin.openDatabase({name:"user.db"});
+
+                db.transaction((tx)=>{
+                    /* 1. Drop users table if it exists*/
+                    /* 2. Create users table if it doesn't exist */
+                    /* 3. Insert token, username and friends list into database */
+                    /* 4. Check and make sure data is stored correctly in the database */
+                })
             }
-            
         })
     })
 }

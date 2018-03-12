@@ -27,6 +27,10 @@
             {
               "xml": "<feature name=\"Notification\"><param name=\"ios-package\" value=\"CDVNotification\" /></feature>",
               "count": 1
+            },
+            {
+              "xml": "<feature name=\"SQLitePlugin\"><param name=\"ios-package\" value=\"SQLitePlugin\" /></feature>",
+              "count": 1
             }
           ]
         }
@@ -41,6 +45,9 @@
       "PACKAGE_NAME": "com.gmarkham.com"
     },
     "cordova-plugin-dialogs": {
+      "PACKAGE_NAME": "com.gmarkham.com"
+    },
+    "cordova-sqlite-storage": {
       "PACKAGE_NAME": "com.gmarkham.com"
     }
   },
@@ -69,11 +76,20 @@
       "merges": [
         "navigator.notification"
       ]
+    },
+    {
+      "id": "cordova-sqlite-storage.SQLitePlugin",
+      "file": "plugins/cordova-sqlite-storage/www/SQLitePlugin.js",
+      "pluginId": "cordova-sqlite-storage",
+      "clobbers": [
+        "SQLitePlugin"
+      ]
     }
   ],
   "plugin_metadata": {
     "cordova-plugin-statusbar": "2.4.1",
     "cordova-plugin-device": "2.0.1",
-    "cordova-plugin-dialogs": "2.0.1"
+    "cordova-plugin-dialogs": "2.0.1",
+    "cordova-sqlite-storage": "2.2.1"
   }
 }

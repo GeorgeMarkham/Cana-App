@@ -26,7 +26,7 @@
   "cordova-sqlite-storage": {
     "source": {
       "type": "registry",
-      "id": "cordova-sqlite-storage"
+      "id": "cordova-sqlite-storage@^2.2.1"
     },
     "is_top_level": true,
     "variables": {}

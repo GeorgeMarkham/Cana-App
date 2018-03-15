@@ -42,12 +42,33 @@ function deviceReady(){
 
                     if(localStorage.getItem('user') != null){
                         console.log(localStorage.getItem('user'));
-
+                        //Change to username set page
+                        var edit_username_page = $('#edit_username_page');
+                        $.mobile.changePage(edit_username_page);
                     } else {
-                        console.log("Something bad happened")
+                        console.log("Something bad happened!")
                     }
                 }
             }
+        })
+    })
+
+    $("#username_set_send_btn").on('click', (e)=>{
+        var user = JSON.parse(localStorage.getItem('user'));
+        var username = $('#username_input').val();
+        var data = {
+            username: username,
+            token: user.token
+        }
+        $.post('http://localhost:8080/update-username', data, (data, status)=>{
+            console.log(status);
+            console.log(data);
+        })
+        .done(()=>{
+            //Done
+        })
+        .fail(()=>{
+            console.log("failed");
         })
     })
 }

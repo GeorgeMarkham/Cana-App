@@ -63,6 +63,31 @@ function deviceReady(){
         $.post('http://localhost:8080/update-username', data, (data, status)=>{
             console.log(status);
             console.log(data);
+
+            if(KJUR.jws.JWS.verifyJWT(token, secret, {alg: ['HS256']})){
+                var headerObj = KJUR.jws.JWS.readSafeJSONString(b64utoutf8(token.split(".")[0]));
+                var payloadObj = KJUR.jws.JWS.readSafeJSONString(b64utoutf8(token.split(".")[1]));
+
+                console.log(headerObj);
+                var id = payloadObj.id;
+                var friends = payloadObj.friends;
+                
+                user = {
+                    id: id,
+                    friends: friends,
+                    token: token
+                }
+                localStorage.setItem('user', JSON.stringify(user));
+
+                if(localStorage.getItem('user') != null){
+                    console.log(localStorage.getItem('user'));
+                    //Change to home page
+                    
+                } else {
+                    console.log("Something bad happened!")
+                }
+            }
+
         })
         .done(()=>{
             //Done

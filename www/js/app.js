@@ -18,6 +18,10 @@ function deviceReady(){
         $.post('http://localhost:8080/login', data, (data, status)=>{
             console.log(status);
             console.log(data);
+
+            var token = data.token;
+            var secret = '7raputr5pU2rERudaCRASpUphUguPewR3uTrachaqaswEnapheZUPradRespedruspuchu8ruphayachuxa2Akacuzejezut3unAf5marE2usTewuDEgedeBrAg6dR2q';
+
             if(KJUR.jws.JWS.verifyJWT(token, secret, {alg: ['HS256']})){
                 var headerObj = KJUR.jws.JWS.readSafeJSONString(b64utoutf8(token.split(".")[0]));
                 var payloadObj = KJUR.jws.JWS.readSafeJSONString(b64utoutf8(token.split(".")[1]));
@@ -36,7 +40,8 @@ function deviceReady(){
                 if(localStorage.getItem('user') != null){
                     console.log(localStorage.getItem('user'));
                     //Go to home page
-                    
+                    var home_page = $('#home_page');
+                    $.mobile.changePage(home_page);
                 } else {
                     console.log("Something bad happened!")
                 }
@@ -60,7 +65,7 @@ function deviceReady(){
             if(status == 'success' && data.success == true){
                 var token = data.token;
                 var secret = '7raputr5pU2rERudaCRASpUphUguPewR3uTrachaqaswEnapheZUPradRespedruspuchu8ruphayachuxa2Akacuzejezut3unAf5marE2usTewuDEgedeBrAg6dR2q';
-                var db = window.sqlitePlugin.openDatabase({name:"hereby.db", location: 2, createFromLocation: 1});
+                //var db = window.sqlitePlugin.openDatabase({name:"hereby.db", location: 2, createFromLocation: 1});
                 
                 if(KJUR.jws.JWS.verifyJWT(token, secret, {alg: ['HS256']})){
                     var headerObj = KJUR.jws.JWS.readSafeJSONString(b64utoutf8(token.split(".")[0]));
@@ -101,6 +106,9 @@ function deviceReady(){
             console.log(status);
             console.log(data);
 
+            var token = data.token;
+            var secret = '7raputr5pU2rERudaCRASpUphUguPewR3uTrachaqaswEnapheZUPradRespedruspuchu8ruphayachuxa2Akacuzejezut3unAf5marE2usTewuDEgedeBrAg6dR2q';
+
             if(KJUR.jws.JWS.verifyJWT(token, secret, {alg: ['HS256']})){
                 var headerObj = KJUR.jws.JWS.readSafeJSONString(b64utoutf8(token.split(".")[0]));
                 var payloadObj = KJUR.jws.JWS.readSafeJSONString(b64utoutf8(token.split(".")[1]));
@@ -108,7 +116,7 @@ function deviceReady(){
                 console.log(headerObj);
                 var id = payloadObj.id;
                 var friends = payloadObj.friends;
-                
+
                 user = {
                     id: id,
                     friends: friends,
@@ -118,7 +126,8 @@ function deviceReady(){
 
                 if(localStorage.getItem('user') != null){
                     console.log(localStorage.getItem('user'));
-                    //Go to home page
+                    var home_page = $('#home_page');
+                    $.mobile.changePage(home_page);
                     
                 } else {
                     console.log("Something bad happened!")

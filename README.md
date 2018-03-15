@@ -1,15 +1,6 @@
-# A Blank PhoneGap App
-
-## Usage
-
-### PhoneGap CLI
-
-    $ phonegap create my-app --template blank
-
-### Desktop
-
-In your browser, open the file:
-
-    /www/index.html
-
 # HereBy-App
+
+Run the following command and go to the url it prints out, it won't do anything cos my server's not live yet
+```
+phonegap serve
+```

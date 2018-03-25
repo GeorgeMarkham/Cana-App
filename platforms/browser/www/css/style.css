@@ -1,32 +1,75 @@
-header{
-    padding-top:15px;
+input{
+    -webkit-border-radius: 0px !important;
+    -moz-border-radius: 0px !important;
+    border-radius: 0px !important;
+    -moz-box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+    height:75px;
+    color:#3B86CC !important;
+    font-size:1.1em;
+    font-weight:600;
+    text-align:center;
+}
+::placeholder{
+    color:#3B86CC !important;
+    opacity:0.6;
+    font-size:1.1em;
+    font-weight:600;
+}
+input:focus {
+    outline: none !important;
 }
 header h1{
     text-align: center;
     color: #3B86CC;
     font-size: 5em;
 }
-button{
-    font-weight: 700;
-    border: none;
+div#login_form div{
+    text-shadow:none;
+    text-align:center;
+    margin-top:15px;
 }
-.full-width{
-    width:100%;
-    height: 75px;
-    font-size: 30px;
+label{
+    font-size:1.2em !important;
+    color:#FF3B30;
 }
-#btns{
+div#btns{
+    display:flex;
+    flex-direction:column;
     height: 150px;
     width:100%;
     overflow:hidden;
     position: absolute;
-    bottom:0;
+    bottom:0px;
     left:0;
 }
+
+div#btns button{
+    background: #FF3B30;
+    color:#ffffff;
+    border:none;
+    font-weight:700;
+    text-shadow:none;
+    height: 75px;
+    width:100%;
+    font-size: 1.3em;
+    margin-bottom:-15px;
+}
+
+div#btns button#login_btn{
+    background: #FF3B30;
+}
+
+div#btns button#send_to_signup_btn{
+    background: #3B86CC;
+}
+
 #login_page{
     height: 100%;
     margin: 0;
     background-color: #F0FF49;
+    overflow:hidden;
 }
 #signup_page{
     height: 100%;
@@ -39,19 +82,11 @@ button{
     color: #FFFFFF;
     font-size: 5em;
 }
-#login_btn{
+#signup_btn{
     background: #FF3B30;
-    color:#ffffff;
-    border:none;
-    font-weight:700;
-    text-shadow:none;
+    text-color: #FFFFFF;
 }
 
-.ui-btn {
-    height: 65px;
-    font-size: 1.3em;
-    margin-bottom:0;
-}
 .ui-focus {
     -moz-box-shadow: none !important;
     -webkit-box-shadow: none !important;

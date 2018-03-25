@@ -10,9 +10,6 @@
 
         <!-- CSS -->
         <link rel="stylesheet" href="./css/jquery.mobile-1.4.5.min.css">
-        <link rel="stylesheet" href="./css/bootstrap.min.css">
-        <link rel="stylesheet" href="./css/bootstrap-reboot.min.css">
-        <link rel="stylesheet" href="./css/bootstrap-grid.min.css">
         <link rel="stylesheet" href="./css/style.css">
         
         <!-- Cordova JS -->
@@ -26,37 +23,37 @@
             </header>
             <div id="login_form">
                 <form>
-                    <div class="form-group">
+                    <div>
                         <label for="login_email_input">Email address</label>
-                        <input type="email" class="form-control" id="login_email_input" placeholder="Email">
+                        <input data-enhance="false" type="email" id="login_email_input" placeholder="Email">
                     </div>
-                    <div class="form-group">
+                    <div>
                         <label for="login_password_input">Password</label>
-                        <input type="password" class="form-control" id="login_password_input" placeholder="Password">
+                        <input data-enhance="false" type="password" id="login_password_input" placeholder="Password">
                     </div>
                 </form>
             </div>
             <div id="btns">
-                <button id="login_btn" data-corners="false">Login</button>
-                <a data-role="button" class="blue-btn" href="#signup_page" style="background: #3B86CC; color:#ffffff; border:none; font-weight:700; text-shadow:none;" data-corners="false">Or Signup...</a>
+                <button data-enhance="false" id="login_btn" data-corners="false">Login</button>
+                <button data-corners="false" id="send_to_signup_btn">Or Signup...</a>
             </div>
         </div>
         <div data-role="page" id="signup_page">
-            <header>
+            <header >
                 <h1>HereBy</h1>
             </header>
             <form>
                 <div class="form-group">
                     <label for="signup_email_input">Email address</label>
-                    <input type="email" class="form-control" id="signup_email_input" placeholder="Email">
+                    <input data-enhance="false" type="email" class="form-control" id="signup_email_input" placeholder="Email">
                 </div>
                 <div class="form-group">
                     <label for="signup_password_input">Password</label>
-                    <input type="password" class="form-control" id="signup_password_input" placeholder="Password">
+                    <input data-enhance="false" type="password" class="form-control" id="signup_password_input" placeholder="Password">
                 </div>
             </form>
             <div id="btns">
-                <button id="signup_btn" data-role="button" class="blue-btn">Signup</button>
+                <button data-enhance="false" id="signup_btn" data-role="button" data-corners="false" class="blue-btn">Signup</button>
             </div>
         </div>
         <div data-role="page" id="edit_username_page">
@@ -66,15 +63,15 @@
             <form>
                 <div class="form-group">
                     <label for="username_input">Pick your username</label>
-                    <input type="text" class="form-control" id="username_input" placeholder="Username">
+                    <input data-enhance="false" type="text" class="form-control" id="username_input" placeholder="Username">
                 </div>
             </form>
             <div id="btns">
-                <button id="username_set_send_btn" data-role="button" class="blue-btn">Set Username</button>
+                <button data-enhance="false" id="username_set_send_btn" data-role="button" class="blue-btn">Set Username</button>
             </div>
         </div>
         <div data-role="page" id="home_page">
-            <header>
+            <header >
                 <h1>HereBy</h1>
             </header>
         </div>

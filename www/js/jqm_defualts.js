@@ -1,5 +1,8 @@
 $(document).bind("mobileinit", function () {
 
+	/* Get rid of styling */
+	$.mobile.ignoreContentEnabled=true;
+
     $.mobile.changePage.defaults.changeHash = true;
 	$.mobile.hashListeningEnabled = true;
 	$.mobile.pushStateEnabled = false;

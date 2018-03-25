@@ -40,8 +40,7 @@ function deviceReady(){
                 if(localStorage.getItem('user') != null){
                     console.log(localStorage.getItem('user'));
                     //Go to home page
-                    var home_page = $('#home_page');
-                    $.mobile.changePage(home_page);
+                    $.mobile.changePage($('#home_page'));
                 } else {
                     console.log("Something bad happened!")
                 }
@@ -49,6 +48,15 @@ function deviceReady(){
         })
 
     })
+
+    $('#signup_page').on('pagebeforecreate pagecreate', (e)=>{
+        console.log(e);
+    })
+
+    $('#send_to_signup_btn').on('click', (e)=>{
+        $.mobile.changePage($('#signup_page'));
+    })
+
 
     $('#signup_btn').on('click', (e)=>{
         e.preventDefault();

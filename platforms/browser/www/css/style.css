@@ -40,7 +40,7 @@ div#btns{
     height: 150px;
     width:100%;
     overflow:hidden;
-    position: absolute;
+    position: fixed;
     bottom:0px;
     left:0;
 }

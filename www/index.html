@@ -6,7 +6,7 @@
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
         
-        <title>HereBy</title>
+        <title>Cana</title>
 
         <!-- CSS -->
         <link rel="stylesheet" href="./css/jquery.mobile-1.4.5.min.css">
@@ -31,11 +31,11 @@
                         <label for="login_password_input">Password</label>
                         <input data-enhance="false" type="password" id="login_password_input" placeholder="Password">
                     </div>
+                    <a data-enhance="false" href="#signup_page" id="send_to_signup_btn">Or create an account</a>
                 </form>
             </div>
             <div id="btns" data-role="footer">
                 <button data-enhance="false" id="login_btn" data-corners="false">Login</button>
-                <button data-corners="false" id="send_to_signup_btn">Or Signup...</a>
             </div>
         </div>
         <div data-role="page" id="signup_page">
@@ -56,24 +56,29 @@
                 <button data-enhance="false" id="signup_btn" data-role="button" data-corners="false" class="blue-btn">Signup</button>
             </div>
         </div>
-        <div data-role="page" id="edit_username_page">
+        <div data-role="page" id="setup_page">
             <header>
-                <h1>HereBy</h1>
+                <h2>Setup your account</h2>
             </header>
             <form>
-                <div class="form-group">
+                <div id="setup_form" class="form-group">
                     <label for="username_input">Pick your username</label>
                     <input data-enhance="false" type="text" class="form-control" id="username_input" placeholder="Username">
+                    <label for="profile_pic_input">Set your profile picture</label>
+                    <input data-enhance="false" data-corners="true" type="button" class="form-control" id="profile_pic_input" placeholder="Profile pic">
                 </div>
             </form>
             <div id="btns" data-role="footer">
-                <button data-enhance="false" id="username_set_send_btn" data-role="button" class="blue-btn">Set Username</button>
+                <button data-enhance="false" id="account_setup_send_btn" data-role="button" class="blue-btn">Done!</button>
             </div>
         </div>
         <div data-role="page" id="home_page">
-            <header >
-                <h1>HereBy</h1>
-            </header>
+            <h2 id="username"></h2>
+            <div>
+                <ul data-role="listview">
+                    <!-- <li><a>FRIEND NAME</a></li> -->
+                </ul>
+            </div>
         </div>
         <script src="./js/jquery-1.11.1.min.js"></script>
         <script src="./js/jqm_defualts.js"></script>

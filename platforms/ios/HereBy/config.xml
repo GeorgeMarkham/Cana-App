@@ -32,6 +32,9 @@
     <feature name="SQLitePlugin">
         <param name="ios-package" value="SQLitePlugin" />
     </feature>
+    <feature name="Camera">
+        <param name="ios-package" value="CDVCamera" />
+    </feature>
     <name>HereBy</name>
     <description>
         HereBy is an app to help you hang out with your friends!
@@ -84,5 +87,6 @@
     <preference name="PaginationMode" value="unpaginated" />
     <preference name="StatusBarOverlaysWebView" value="true" />
     <preference name="StatusBarStyle" value="default" />
+    <preference name="CameraUsesGeolocation" value="false" />
     <preference name="StatusBarBackgroundColor" value="#F0FF49" />
 </widget>

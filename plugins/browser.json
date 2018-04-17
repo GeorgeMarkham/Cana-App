@@ -18,6 +18,9 @@
     },
     "cordova-sqlite-storage": {
       "PACKAGE_NAME": "com.gmarkham.com"
+    },
+    "cordova-plugin-camera": {
+      "PACKAGE_NAME": "com.gmarkham.com"
     }
   },
   "dependent_plugins": {}

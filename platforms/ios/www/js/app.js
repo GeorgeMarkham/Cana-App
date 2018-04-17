@@ -3,7 +3,6 @@ $().ready(deviceReady());
 
 function deviceReady(){
     console.log("Device ready!");
-
     // Initialize Firebase
     var config = {
         apiKey: "AIzaSyDAa7z8Jo_pWHKqPsFFSotxYcf_w9PiaNY",
@@ -30,7 +29,11 @@ function deviceReady(){
     firebase.auth().onAuthStateChanged((user) => {
         if (user) {
             // Go to home page if account is setup
-            if(user.isAccountSetup){
+            if(user.displayName){
+                if(typeof(localStorage) != "undefined"){
+                    localStorage.setItem(user.uid, JSON.stringify(user));
+                    //console.log(localStorage.getItem(user.uid));
+                }
                 $.mobile.changePage('#home_page');
             } else {
                 //Go to setup page if the account is not setup
@@ -67,8 +70,8 @@ function deviceReady(){
 
     $('#signup_btn').on('tap', (e)=>{
         e.preventDefault();
-        var email_input = $('#login_email_input');
-        var password_input = $('#login_password_input');
+        var email_input = $('#signup_email_input');
+        var password_input = $('#signup_password_input');
 
         firebase.auth().createUserWithEmailAndPassword(email_input.val(), password_input.val()).catch((error) => {
             console.log(error.code + ": " + error.message);
@@ -79,12 +82,17 @@ function deviceReady(){
         e.preventDefault();
         navigator.camera.getPicture((imgData)=>{
             user = firebase.auth().currentUser;
-            profileImgRef = imagesRef.child(''+user.uid).child('/profile_picture');
+            /*profileImgRef = imagesRef.child(''+user.uid).child('/profile_picture');
             profileImgRef.putString(imgData, 'base64').then((snapshot)=>{
                 console.log(snapshot.downloadURL);
-                profile_pic_url = snapshot.downloadURL;
-                $('#profile_pic_input').css('background-image', 'url(data:image/jpeg;base64,' + imgData + ')');
-            });
+                if(typeof(localStorage) != "undefined"){
+                    localStorage.setItem(user.uid+".photoURL", snapshot.downloadURL);
+                }
+            });*/
+            if(typeof(localStorage) != "undefined"){
+                localStorage.setItem(user.uid+".profile_pic", imgData);
+            }
+            $('#profile_pic_input').css('background-image', 'url(data:image/jpeg;base64,' + imgData + ')');
         }, (err)=>{
             console.log(err);
             alert("Something didn't go to plan, try again!");
@@ -97,25 +105,33 @@ function deviceReady(){
         e.preventDefault();
         var user = firebase.auth().currentUser;
         if(user){
-            user.updateProfile({
-                displayName: $('#username_input').val(),
-                photoURL: profile_pic_url
-            }).then(()=>{
-                console.log(user.displayName);
-                $.mobile.changePage('#home_page');
-            }).catch((err)=>{
-                console.log(err);
-                alert("Somethings not quite right, try again in a minute!");
-            });
+            if(typeof(localStorage) != "undefined"){
+                imgData = localStorage.getItem(user.uid+'.profile_pic');
+                profileImgRef = imagesRef.child(''+user.uid).child('/profile_picture');
+                profileImgRef.putString(imgData, 'base64').then((snapshot)=>{
+                    //console.log(snapshot.downloadURL);
+                    user.updateProfile({
+                        displayName: $('#username_input').val(),
+                        photoURL: snapshot.downloadURL
+                    }).then(()=>{
+                        console.log(user.displayName);
+                        if(typeof(localStorage) != "undefined"){
+                            localStorage.setItem(user.uid, JSON.stringify(user));
+                            console.log(localStorage.getItem(user.uid));
+                        }
+                        $.mobile.changePage('#home_page');
+                    }).catch((err)=>{
+                        console.log(err);
+                        alert("Somethings not quite right, try again in a minute!");
+                    });
+                });
+            }
         }
     });
 
     //Page Events
 
     $('#setup_page').on('pageshow', (e) => {
-        if(firebase.auth().currentUser.displayName){
-            $.mobile.changePage('#home_page');
-        }
     })
 
     $('#home_page').on('pageshow', (e) => {
@@ -125,6 +141,12 @@ function deviceReady(){
         
         /* This should never be false but just to make sure*/
         if(user){
+            if(typeof(localStorage) != "undefined"){
+                var imgData = localStorage.getItem(user.uid+".profile_pic");
+                document.getElementById('profile_pic').setAttribute(
+                    'src', 'data:image/png;base64,' + imgData
+                );
+            }
             $('#username').html("@" + user.displayName)
         } else {
             $.mobile.changePage('#login_page');

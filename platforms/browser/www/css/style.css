@@ -116,9 +116,27 @@ a#send_to_signup_btn{
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
+}
 
-    -webkit-animation: 0.25, ease;
-  }
+#user_data{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align:center;
+}
+
+#profile_pic{
+    margin:15px auto !important;
+    width: 120px;
+    height: 120px;
+    border-radius: 50% !important;
+
+    background-color: slategrey;
+
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+}
 
 .ui-focus {
     -moz-box-shadow: none !important;

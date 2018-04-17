@@ -73,13 +73,24 @@
             </div>
         </div>
         <div data-role="page" id="home_page">
-            <h2 id="username"></h2>
+            <div id="user_data">
+                <img id="profile_pic"></img><h2 id="username"></h2>
+            </div>
             <div>
                 <ul data-role="listview">
                     <!-- <li><a>FRIEND NAME</a></li> -->
                 </ul>
             </div>
         </div>
+
+        <div data-role="page" id="search_page">
+                <h2>Search for a user</h2>
+                <div>
+                    <ul data-role="listview" id="search_results">
+                    </ul>
+                </div>
+            </div>
+
         <script src="./js/jquery-1.11.1.min.js"></script>
         <script src="./js/jqm_defualts.js"></script>
         <script src="./js/jquery.mobile-1.4.5.min.js"></script>

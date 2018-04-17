@@ -106,24 +106,39 @@ function deviceReady(){
         var user = firebase.auth().currentUser;
         if(user){
             if(typeof(localStorage) != "undefined"){
-                imgData = localStorage.getItem(user.uid+'.profile_pic');
-                profileImgRef = imagesRef.child(''+user.uid).child('/profile_picture');
-                profileImgRef.putString(imgData, 'base64').then((snapshot)=>{
-                    //console.log(snapshot.downloadURL);
-                    user.updateProfile({
-                        displayName: $('#username_input').val(),
-                        photoURL: snapshot.downloadURL
-                    }).then(()=>{
-                        console.log(user.displayName);
-                        if(typeof(localStorage) != "undefined"){
-                            localStorage.setItem(user.uid, JSON.stringify(user));
-                            console.log(localStorage.getItem(user.uid));
-                        }
-                        $.mobile.changePage('#home_page');
-                    }).catch((err)=>{
-                        console.log(err);
-                        alert("Somethings not quite right, try again in a minute!");
-                    });
+                
+                var imgData = localStorage.getItem(user.uid+'.profile_pic');
+                var username = $('#username_input').val();
+                username = username.toLowerCase();
+                firebase.database().ref("users").orderByChild("username").equalTo(username).once('value').then((snapshot)=>{
+                    if(!snapshot.hasChildren()){
+                        firebase.database().ref('users/' + user.uid).set({
+                            username: username
+                        }).then(()=>{
+                            //All good carry on!
+                            profileImgRef = imagesRef.child(''+user.uid).child('/profile_picture');
+                            profileImgRef.putString(imgData, 'base64').then((snapshot)=>{
+                            user.updateProfile({
+                                displayName: username,
+                                photoURL: snapshot.downloadURL
+                            }).then(()=>{
+                                console.log(user.displayName);
+                                localStorage.setItem(user.uid, JSON.stringify(user));
+                                $.mobile.changePage('#home_page');
+                            }).catch((err)=>{
+                                console.log(err);
+                                alert("Somethings not quite right, try again in a minute!");
+                            });
+                        });
+                        }).catch((err)=>{
+                            console.log(err);
+                        })
+                    } else {
+                        alert("That username is so good it's already been taken, try something different");
+                    }
+                    ret = true;
+                }).catch((err)=>{
+                    console.log(err);
                 });
             }
         }
@@ -132,6 +147,8 @@ function deviceReady(){
     //Page Events
 
     $('#setup_page').on('pageshow', (e) => {
+        var file_num = Math.floor(Math.random()*3);
+        $('#profile_pic_input').css('background-image', 'url(../imgs/profile_pics/' + file_num + '.png)');
     })
 
     $('#home_page').on('pageshow', (e) => {
@@ -153,4 +170,11 @@ function deviceReady(){
         }
     });
 
+}
+
+//helper functions
+
+function check_if_username_unique(username){
+    var ret = false;
+    return ret;
 }

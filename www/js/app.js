@@ -152,12 +152,12 @@ function deviceReady(){
     })
 
     $('#home_page').on('pageshow', (e) => {
-        
         //Grab the user object
         var user = firebase.auth().currentUser;
         
         /* This should never be false but just to make sure*/
         if(user){
+            //Set profile pic
             if(typeof(localStorage) != "undefined"){
                 if(localStorage.getItem(user.uid+".profile_pic")){
                     document.getElementById('profile_pic').setAttribute(
@@ -169,6 +169,7 @@ function deviceReady(){
                         document.getElementById('profile_pic').setAttribute(
                             'src', url
                         );
+                        //Maybe get image as bas64 string and save to local storage to save constantly downloading the image?
                     }).catch((err)=>{
                         console.log(err);
                         var file_num = Math.floor(Math.random()*3);
@@ -178,6 +179,13 @@ function deviceReady(){
                     });
                 }
             }
+
+            //Populate friends list from array
+            var friends = ['Chandler', 'Joey', 'Pheobe', 'Monica', 'Rachel', 'Ross']; //Default friends for testing
+            friends.forEach(friend => {
+                $('#friends_list_view').append("<li><a>" + friend + "</a></li>");
+            });
+
         } else {
             $.mobile.changePage('#login_page');
         }
@@ -185,9 +193,13 @@ function deviceReady(){
 
 }
 
-//helper functions
-
-function check_if_username_unique(username){
-    var ret = false;
-    return ret;
-}
+//Deal with friends list scroll
+document.addEventListener('scroll', (event)=>{
+    if(event.target.id == '#friends_list_view'){
+        //Transition profile pic to be smaller (50px by 50px) and in the top left corner
+        $('#profile_pic').animate({
+            height:'50px',
+            width:'50px'
+        });
+    }
+})

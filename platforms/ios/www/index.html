@@ -10,6 +10,7 @@
 
         <!-- CSS -->
         <link rel="stylesheet" href="./css/jquery.mobile-1.4.5.min.css">
+        <link rel="stylesheet" href="./css/fa/css/font-awesome.min.css">
         <link rel="stylesheet" href="./css/style.css">
         
         <!-- Cordova JS -->
@@ -75,12 +76,15 @@
 
         <div data-role="page" id="home_page">
             <div id="user_data">
+                <button id="search_page_btn" class="fa fa-search" aria-hidden="true"></button>
                 <img id="profile_pic"></img><h2>Your friends:</h2>
             </div>
             <div>
-                <ul data-role="listview">
-                    <!-- <li><a>FRIEND NAME</a></li> -->
-                </ul>
+                <div id="friends_list_view">
+                    <ul data-role="listview" style="overflow:scroll">
+                        <!-- <li><a>FRIEND NAME</a></li> -->
+                    </ul>
+                </div>
             </div>
         </div>
 

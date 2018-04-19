@@ -152,6 +152,50 @@ a#send_to_signup_btn{
     background-size: cover;
 }
 
+#search_page_btn{
+    margin:15px 15px auto auto !important;
+    width: 50px;
+    height: 50px;
+    border-radius: 50% !important;
+
+    background-color: #3B86CC;
+    color:#ffffff;
+    text-align: center;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    box-shadow: none;
+}
+
+#friends_list_view{
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+#friends_list_view ul{
+    list-style-type: none;
+}
+
+#friends_list_view li{
+    height: 75px;
+    width: 100%;
+    background-color: #FF3B30;
+    font-size:1.6em;
+    text-shadow: none;
+    color:#ffffff;
+    line-height: 75px;
+    border-style: solid none solid none;
+    border-width: 1px;
+    border-color: #F0FF49;
+    list-style-type: none;
+}
+#friends_list_view li a{
+    font-size:1.2em;
+    text-shadow: none;
+    color:#ffffff;
+    margin-left:5px;
+} 
+
 #user_search_input {
 
     font-size: 1.3em;

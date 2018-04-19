@@ -84,6 +84,14 @@ a#send_to_signup_btn{
     color:#FFFFFF;
     background-color: #3B86CC;
 }
+
+#home_page{
+    height: 100%;
+    margin: 0;
+    background-color: #F0FF49;
+    overflow:hidden;
+}
+
 #signup_page header h1{
     text-align: center;
     color: #FFFFFF;
@@ -122,7 +130,13 @@ a#send_to_signup_btn{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    text-align:center;
+    text-align:left;
+}
+#user_data h2{
+    font-size: 2em;
+    margin-left:10px;
+    text-shadow:none;
+    color: #FF3B30;
 }
 
 #profile_pic{
@@ -136,6 +150,11 @@ a#send_to_signup_btn{
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
+}
+
+#user_search_input {
+
+    font-size: 1.3em;
 }
 
 .ui-focus {

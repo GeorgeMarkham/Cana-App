@@ -159,12 +159,25 @@ function deviceReady(){
         /* This should never be false but just to make sure*/
         if(user){
             if(typeof(localStorage) != "undefined"){
-                var imgData = localStorage.getItem(user.uid+".profile_pic");
-                document.getElementById('profile_pic').setAttribute(
-                    'src', 'data:image/png;base64,' + imgData
-                );
+                if(localStorage.getItem(user.uid+".profile_pic")){
+                    document.getElementById('profile_pic').setAttribute(
+                        'src', 'data:image/png;base64,' + localStorage.getItem(user.uid+".profile_pic")
+                    );
+                } else {
+                    var profile_pic_ref = storage.refFromURL(user.photoURL);
+                    profile_pic_ref.getDownloadURL().then((url)=>{
+                        document.getElementById('profile_pic').setAttribute(
+                            'src', url
+                        );
+                    }).catch((err)=>{
+                        console.log(err);
+                        var file_num = Math.floor(Math.random()*3);
+                        document.getElementById('profile_pic').setAttribute(
+                            'src', '../imgs/profile_pics/' + file_num + '.png'
+                        );
+                    });
+                }
             }
-            $('#username').html("@" + user.displayName)
         } else {
             $.mobile.changePage('#login_page');
         }

@@ -32,7 +32,6 @@ function deviceReady(){
             if(user.displayName){
                 if(typeof(localStorage) != "undefined"){
                     localStorage.setItem(user.uid, JSON.stringify(user));
-                    //console.log(localStorage.getItem(user.uid));
                 }
                 $.mobile.changePage('#home_page');
             } else {
@@ -53,7 +52,7 @@ function deviceReady(){
     }
 
     //Buttons
-    $('#login_btn').on('tap', (e)=>{
+    $('#login_btn').on('vclick', (e)=>{
         e.preventDefault();
         var email_input = $('#login_email_input');
         var password_input = $('#login_password_input');
@@ -63,12 +62,12 @@ function deviceReady(){
         });
     });
 
-    $('#send_to_signup_btn').on('tap', (e)=>{
+    $('#send_to_signup_btn').on('vclick', (e)=>{
         e.preventDefault();
         $.mobile.changePage('#signup_page')
     });
 
-    $('#signup_btn').on('tap', (e)=>{
+    $('#signup_btn').on('vclick', (e)=>{
         e.preventDefault();
         var email_input = $('#signup_email_input');
         var password_input = $('#signup_password_input');
@@ -78,7 +77,7 @@ function deviceReady(){
         });
     });
 
-    $('#profile_pic_input').on('tap', (e)=>{
+    $('#profile_pic_input').on('vclick', (e)=>{
         e.preventDefault();
         navigator.camera.getPicture((imgData)=>{
             user = firebase.auth().currentUser;
@@ -101,7 +100,7 @@ function deviceReady(){
         });
     });
 
-    $('#account_setup_send_btn').on('tap', (e)=>{
+    $('#account_setup_send_btn').on('vclick', (e)=>{
         e.preventDefault();
         var user = firebase.auth().currentUser;
         if(user){
@@ -152,6 +151,10 @@ function deviceReady(){
     })
 
     $('#home_page').on('pageshow', (e) => {
+
+        var file_num = Math.floor(Math.random()*3);
+        $('#profile_pic').attr('src', './imgs/profile_pics/' + file_num + '.png')
+
         //Grab the user object
         var user = firebase.auth().currentUser;
         
@@ -166,9 +169,10 @@ function deviceReady(){
                 } else {
                     var profile_pic_ref = storage.refFromURL(user.photoURL);
                     profile_pic_ref.getDownloadURL().then((url)=>{
-                        document.getElementById('profile_pic').setAttribute(
+                        /*document.getElementById('profile_pic').setAttribute(
                             'src', url
-                        );
+                        );*/
+                        $('#profile_pic').attr('src', url)
                         //Maybe get image as bas64 string and save to local storage to save constantly downloading the image?
                     }).catch((err)=>{
                         console.log(err);
@@ -181,9 +185,9 @@ function deviceReady(){
             }
 
             //Populate friends list from array
-            var friends = ['Chandler', 'Joey', 'Pheobe', 'Monica', 'Rachel', 'Ross']; //Default friends for testing
+            var friends = ['Chandler', 'Joey', 'Pheobe', 'Monica', 'Rachel', 'Ross', 'Tom', 'Jack']; //Default friends for testing
             friends.forEach(friend => {
-                $('#friends_list_view').append("<li><a>" + friend + "</a></li>");
+                $('#friends_list_view').append("<span><i class='fa fa-user-circle-o'></i></span><li data-name='" + friend + "' data-swiped='false' id='"+friend+"'>"+ friend + "</li>");
             });
 
         } else {
@@ -193,13 +197,86 @@ function deviceReady(){
 
 }
 
-//Deal with friends list scroll
-document.addEventListener('scroll', (event)=>{
-    if(event.target.id == '#friends_list_view'){
-        //Transition profile pic to be smaller (50px by 50px) and in the top left corner
-        $('#profile_pic').animate({
-            height:'50px',
-            width:'50px'
-        });
+$('#friends_list_view').on('click', 'li', (event) => {
+    var friend_name = $('#' + event.target.id).attr('data-name');
+    navigator.notification.alert(
+        friend_name,  // message
+        ()=>{
+            //do nothing
+        }, // callback
+        friend_name, // title
+        'Done' // buttonName
+    );
+    //$.mobile.changePage("#friend_page", data : {''})
+})
+
+$('#friends_list_view').on('swipeleft', 'li', (event) => {
+    //var swiped = event.target.attributes[1].nodeValue;
+    var swiped = $('#' + event.target.id).attr('data-swiped')
+    if(swiped == 'false'){
+       $('#' + event.target.id).css({transform: "translateX(-75px)"});
+       var swiped = $('#' + event.target.id).attr('data-swiped', 'true')
     }
 })
+$('#friends_list_view').on('swiperight', 'li', (event) => {
+    //var swiped = event.target.attributes[1].nodeValue;
+    var swiped = $('#' + event.target.id).attr('data-swiped')
+    if(swiped == 'true'){
+       $('#' + event.target.id).css({transform: ""});
+       var swiped = $('#' + event.target.id).attr('data-swiped', 'false')
+    }
+})
+//Deal with friends list scroll
+// var old_pos = 0
+// var old_id = ""
+// $('#friends_list_view').on('scrollstart',( event ) => {
+//     var element_id = event.target.id;
+//     var new_pos = $('#' + element_id).position()
+//     if(element_id != old_id){
+//         old_id = element_id;
+//         old_pos = new_pos;
+//         //console.log(new_pos.top)
+//         /*if(old_pos.top > new_pos.top){
+//             old_pos = new_pos;
+//             console.log("Scroll up ^^^");
+//         } else if(old_pos.top < new_pos.top) {
+//             old_pos = new_pos;
+//             console.log("scroll down ");
+//         }*/
+//     }
+// });
+// $('#friends_list_view').on('scrollstop',( event ) => {
+//     var element_id = event.target.id;
+//     var new_pos = $('#' + element_id).position()
+//     if(old_pos.top > new_pos.top){
+//         $("#profile_pic").css("position", "absolute");
+//         $("#profile_pic").animate({
+//             width:'75px',
+//             height:'75px',
+//             top:'0px',
+//             left:'5px',
+//         });
+//         $("#profile_pic").css("margin-top", "0px");
+//         $("#profile_pic").css("margin-bottom", "15px");
+//         $("#friends_div").animate({
+//             maxHeight:'600px'
+//         });
+//         $("#user_data").css("flex-direction", 'row-reverse');
+//         $("#user_data").css("justify-content", 'left');
+//     }
+//     if(old_pos.top < new_pos.top){
+//         $("#profile_pic").css("position", "");
+//         $("#profile_pic").animate({
+//             width:'150px',
+//             height:'150px'
+//         });
+//         $("#friends_div").animate({
+//             maxHeight:'350px'
+//         });
+//         $("#user_data").css("flex-direction", 'column');
+//         $("#user_data").css("justify-content", 'center');
+//     }
+// });
+// // document.addEventListener('scroll', (event)=>{
+// //     alert(event.target.id);
+// // });

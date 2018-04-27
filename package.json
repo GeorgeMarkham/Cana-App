@@ -4,8 +4,8 @@
   "displayName": "HereBy",
   "cordova": {
     "platforms": [
-      "ios",
-      "browser"
+      "browser",
+      "ios"
     ],
     "plugins": {
       "cordova-plugin-statusbar": {},

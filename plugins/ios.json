@@ -7,10 +7,19 @@
     "files": {}
   },
   "installed_plugins": {
-    "cordova-sqlite-storage": {
+    "cordova-plugin-camera": {
       "PACKAGE_NAME": "com.gmarkham.com"
     },
-    "cordova-plugin-camera": {
+    "cordova-plugin-device": {
+      "PACKAGE_NAME": "com.gmarkham.com"
+    },
+    "cordova-plugin-dialogs": {
+      "PACKAGE_NAME": "com.gmarkham.com"
+    },
+    "cordova-plugin-statusbar": {
+      "PACKAGE_NAME": "com.gmarkham.com"
+    },
+    "cordova-sqlite-storage": {
       "PACKAGE_NAME": "com.gmarkham.com"
     }
   },

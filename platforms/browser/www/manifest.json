@@ -1,10 +1,10 @@
 {
   "background_color": "#FFF",
   "display": "standalone",
-  "name": "HereBy",
-  "short_name": "HereBy",
+  "name": "Cana",
+  "short_name": "Cana",
   "version": "com.gmarkham.com",
-  "description": "HereBy is an app to help you hang out with your friends!",
+  "description": "Cana is an app to help you hang out with your friends!",
   "author": "George Markham",
   "icons": [
     {

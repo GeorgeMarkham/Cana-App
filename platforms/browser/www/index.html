@@ -40,8 +40,8 @@
             </div>
         </div>
         <div data-role="page" id="signup_page">
-            <header >
-                <h1>HereBy</h1>
+            <header>
+                <h1>Cana</h1>
             </header>
             <form>
                 <div class="form-group">
@@ -52,6 +52,7 @@
                     <label for="signup_password_input">Password</label>
                     <input data-enhance="false" type="password" class="form-control" id="signup_password_input" placeholder="Password">
                 </div>
+                <a data-enhance="false" href="#signup_page" id="send_to_signup_btn">Or Login</a>
             </form>
             <div id="btns" data-role="footer">
                 <button data-enhance="false" id="signup_btn" data-role="button" data-corners="false" class="blue-btn">Signup</button>
@@ -76,12 +77,13 @@
 
         <div data-role="page" id="home_page">
             <div id="user_data">
-                <button id="search_page_btn" class="fa fa-search" aria-hidden="true"></button>
-                <img id="profile_pic"></img><h2>Your friends:</h2>
+                <button id="search_page_btn" class="fa fa-search" style="vertical-align: middle;" aria-hidden="true"></button>
+                <img id="profile_pic"></img>
             </div>
             <div>
-                <div id="friends_list_view">
-                    <ul data-role="listview" style="overflow:scroll">
+                <h2>Your friends:</h2>
+                <div id="friends_div">
+                    <ul data-role="listview" id="friends_list_view">
                         <!-- <li><a>FRIEND NAME</a></li> -->
                     </ul>
                 </div>

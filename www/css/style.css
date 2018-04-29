@@ -194,7 +194,7 @@ ul#friends_list_view{
 }
 
 #friends_list_view span{
-    height: 75px;
+    height: inherit;
     width: 75px;
     text-shadow: none;
     line-height: 75px;
@@ -211,12 +211,12 @@ ul#friends_list_view{
 #friends_list_view span i{
     color: #FF3B30;
     text-align: center;
-    margin:5%;
+    width:inherit;
     font-size:1.6em;
 }
 
 #friends_list_view li{
-    height: 75px;
+    height: inherit;
     width: 100%;
     background-color: #FF3B30;
     font-size:1.6em;

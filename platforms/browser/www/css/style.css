@@ -194,9 +194,8 @@ ul#friends_list_view{
 }
 
 #friends_list_view span{
-    height: 75px;
+    height: inherit;
     width: 75px;
-    font-size:1.6em;
     text-shadow: none;
     line-height: 75px;
     border-style: solid none solid none;
@@ -206,18 +205,18 @@ ul#friends_list_view{
     float: right;
     z-index: -1;
     background-color: #3B86CC;
-    color: #FF3B30;
+    color: #F0FF49;
 }
 
 #friends_list_view span i{
     color: #FF3B30;
     text-align: center;
-    margin:5%;
-    font-size: 2em;
+    width:inherit;
+    font-size:1.6em;
 }
 
 #friends_list_view li{
-    height: 75px;
+    height: inherit;
     width: 100%;
     background-color: #FF3B30;
     font-size:1.6em;

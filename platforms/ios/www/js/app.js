@@ -213,6 +213,8 @@ $('#friends_list_view').on('click', 'li', (event) => {
 $('#friends_list_view').on('swipeleft', 'li', (event) => {
     //var swiped = event.target.attributes[1].nodeValue;
     var swiped = $('#' + event.target.id).attr('data-swiped')
+    $('*[data-swiped="true"]').css({transform: ""});
+    $('*[data-swiped="true"]').attr('data-swiped', 'false')
     if(swiped == 'false'){
        $('#' + event.target.id).css({transform: "translateX(-75px)"});
        var swiped = $('#' + event.target.id).attr('data-swiped', 'true')
@@ -226,57 +228,3 @@ $('#friends_list_view').on('swiperight', 'li', (event) => {
        var swiped = $('#' + event.target.id).attr('data-swiped', 'false')
     }
 })
-//Deal with friends list scroll
-// var old_pos = 0
-// var old_id = ""
-// $('#friends_list_view').on('scrollstart',( event ) => {
-//     var element_id = event.target.id;
-//     var new_pos = $('#' + element_id).position()
-//     if(element_id != old_id){
-//         old_id = element_id;
-//         old_pos = new_pos;
-//         //console.log(new_pos.top)
-//         /*if(old_pos.top > new_pos.top){
-//             old_pos = new_pos;
-//             console.log("Scroll up ^^^");
-//         } else if(old_pos.top < new_pos.top) {
-//             old_pos = new_pos;
-//             console.log("scroll down ");
-//         }*/
-//     }
-// });
-// $('#friends_list_view').on('scrollstop',( event ) => {
-//     var element_id = event.target.id;
-//     var new_pos = $('#' + element_id).position()
-//     if(old_pos.top > new_pos.top){
-//         $("#profile_pic").css("position", "absolute");
-//         $("#profile_pic").animate({
-//             width:'75px',
-//             height:'75px',
-//             top:'0px',
-//             left:'5px',
-//         });
-//         $("#profile_pic").css("margin-top", "0px");
-//         $("#profile_pic").css("margin-bottom", "15px");
-//         $("#friends_div").animate({
-//             maxHeight:'600px'
-//         });
-//         $("#user_data").css("flex-direction", 'row-reverse');
-//         $("#user_data").css("justify-content", 'left');
-//     }
-//     if(old_pos.top < new_pos.top){
-//         $("#profile_pic").css("position", "");
-//         $("#profile_pic").animate({
-//             width:'150px',
-//             height:'150px'
-//         });
-//         $("#friends_div").animate({
-//             maxHeight:'350px'
-//         });
-//         $("#user_data").css("flex-direction", 'column');
-//         $("#user_data").css("justify-content", 'center');
-//     }
-// });
-// // document.addEventListener('scroll', (event)=>{
-// //     alert(event.target.id);
-// // });

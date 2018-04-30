@@ -12,7 +12,8 @@
       "cordova-plugin-device": {},
       "cordova-plugin-dialogs": {},
       "cordova-sqlite-storage": {},
-      "cordova-plugin-camera": {}
+      "cordova-plugin-camera": {},
+      "phonegap-plugin-push": {}
     }
   },
   "dependencies": {
@@ -22,6 +23,7 @@
     "cordova-plugin-device": "^2.0.1",
     "cordova-plugin-dialogs": "^2.0.1",
     "cordova-plugin-statusbar": "^2.4.1",
-    "cordova-sqlite-storage": "^2.2.1"
+    "cordova-sqlite-storage": "^2.2.1",
+    "phonegap-plugin-push": "^2.2.2"
   }
 }

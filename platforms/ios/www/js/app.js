@@ -25,6 +25,40 @@ function deviceReady(){
 
     var imagesRef = storageRef.child('images');
 
+
+    // Push notifications https://github.com/phonegap/phonegap-plugin-push/blob/master/docs/EXAMPLES.md & https://blog.phonegap.com/announcing-phonegap-push-plugin-version-2-0-0-fd165349508f
+    const push = PushNotification.init({
+        android: {
+            "senderID": "AIzaSyDAa7z8Jo_pWHKqPsFFSotxYcf_w9PiaNY"
+        },
+        browser: {
+            pushServiceURL: 'http://push.api.phonegap.com/v1/push'
+        },
+        ios: {
+            alert: "true",
+            badge: "true",
+            sound: "true"
+        },
+        windows: {}
+    });
+    
+    push.on('registration', (data) => {
+        console.log("registration event: " + data.registrationId);
+    });
+    
+    push.on('notification', (data) => {
+        // data.message,
+        // data.title,
+        // data.count,
+        // data.sound,
+        // data.image,
+        // data.additionalData
+    });
+    
+    push.on('error', (e) => {
+        // e.message
+    });
+
     //Observe user state
     firebase.auth().onAuthStateChanged((user) => {
         if (user) {
@@ -153,7 +187,7 @@ function deviceReady(){
     $('#user_search_input').on('keyup', (e)=>{
         $('#search_results').html('');
         var search_term =  $('#user_search_input').val();
-        friends_ref = firebase.database().ref('users').orderByChild('username').limitToFirst(1).equalTo(search_term).once('value', (snapshot) => {
+        var friends_ref = firebase.database().ref('users').orderByChild('username').limitToFirst(1).equalTo(search_term).once('value', (snapshot) => {
             if(snapshot.val() != null){
                 var user_obj = snapshot.toJSON()
                 var uid = Object.keys(user_obj)[0]
@@ -172,6 +206,21 @@ function deviceReady(){
     $("#add_friend_btn").on('vclick', (event)=>{
         var uid = $("#add_friend_btn").attr('data-uid');
         var username = $("#add_friend_btn").attr('data-username');
+        var users_ref = firebase.database().ref('users');
+
+        var add_friend_ref = users_ref.child(firebase.auth().currentUser.uid).child('friends').child(uid);
+        add_friend_ref.set({
+            uid: uid,
+            username: username,
+            accepted: false
+        });
+        firebase.database().ref('/users/' + firebase.auth().currentUser.uid).once('value').then(function(snapshot) {
+            var add_friend_ref = users_ref.child(uid).child('friends').child(firebase.auth().currentUser.uid);
+            add_friend_ref.set({
+                username: snapshot.val().username,
+                accepted: false
+            });
+        });
     });
 
     //Page Events
@@ -195,9 +244,9 @@ function deviceReady(){
             friends_ref.once("value", (snapshot) => {
                 console.log("hi");
                 snapshot.forEach((friend) => {
-                    console.log(friend.key + ": " + friend.val().name);
-                    friend_name = friend.val().name;
-                    $('#friends_list_view').append("<span><i class='fa fa-user-circle-o'></i></span><li data-name='" + friend_name + "' data-swiped='false' id='"+friend_name+"'>"+ friend_name + "</li>");
+                    friend_name = friend.val().username;
+                    console.log(friend.key + ": " + friend_name);
+                    $('#friends_list_view').append("<span><i class='fa fa-user-circle-o fa-lg'></i></span><li data-name='" + friend_name + "' data-swiped='false' id='"+friend_name+"'>"+ friend_name + "</li>");
                 });
             }, (err)=>{
                 console.log(err);
@@ -280,7 +329,7 @@ $('#friends_list_view').on('swiperight', 'li', (event) => {
 })
 
 //Get Firebase Data
-friends_ref = firebase.database().ref('users/' +  user.uid).child('friends');
+friends_ref = firebase.database().ref('users/' +  firebase.auth().currentUser.uid).child('friends');
 snapshot.forEach((friend) => {
     console.log(friend.key + ": " + JSON.stringify(friend.val()));
 });

@@ -35,6 +35,9 @@
     <feature name="SQLitePlugin">
         <param name="ios-package" value="SQLitePlugin" />
     </feature>
+    <feature name="PushNotification">
+        <param name="ios-package" value="PushPlugin" />
+    </feature>
     <name>Cana</name>
     <description>
         Cana is an app to help you hang out with your friends!
@@ -46,6 +49,7 @@
     <icon src="www/icon.png" />
     <splash src="www/splash.png" />
     <access origin="*" />
+    <resource-file src="GoogleService-Info.plist" />
     <icon height="57" platform="ios" src="www/res/icons/ios/icon.png" width="57" />
     <icon height="114" platform="ios" src="www/res/icons/ios/icon@2x.png" width="114" />
     <icon height="40" platform="ios" src="www/res/icons/ios/icon-40.png" width="40" />

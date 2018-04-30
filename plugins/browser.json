@@ -21,6 +21,9 @@
     },
     "cordova-plugin-camera": {
       "PACKAGE_NAME": "com.gmarkham.com"
+    },
+    "phonegap-plugin-push": {
+      "PACKAGE_NAME": "com.gmarkham.cana"
     }
   },
   "dependent_plugins": {}

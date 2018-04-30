@@ -14,7 +14,11 @@
     <feature name="StatusBar">
         <param name="ios-package" onload="true" value="CDVStatusBar" />
     </feature>
+    <platform name="android">
+        <resource-file src="google-services.json" target="google-services.json" />
+    </platform>
     <platform name="ios">
+        <resource-file src="GoogleService-Info.plist" />
         <icon height="57" platform="ios" src="www/res/icons/ios/icon.png" width="57" />
         <icon height="114" platform="ios" src="www/res/icons/ios/icon@2x.png" width="114" />
         <icon height="40" platform="ios" src="www/res/icons/ios/icon-40.png" width="40" />
@@ -45,11 +49,12 @@
     <icon src="www/icon.png" />
     <splash src="www/splash.png" />
     <access origin="*" />
-    <engine name="browser" spec="^5.0.3" />
-    <engine name="ios" spec="^4.5.4" />
     <plugin name="cordova-plugin-statusbar" spec="^2.4.1" />
     <plugin name="cordova-plugin-device" spec="^2.0.1" />
     <plugin name="cordova-plugin-dialogs" spec="^2.0.1" />
     <plugin name="cordova-sqlite-storage" spec="^2.2.1" />
     <plugin name="cordova-plugin-camera" spec="^4.0.2" />
+    <plugin name="phonegap-plugin-push" spec="^2.2.2" />
+    <engine name="browser" spec="^5.0.3" />
+    <engine name="ios" spec="^4.5.4" />
 </widget>

@@ -1,10 +1,10 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.gmarkham.com" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
+<widget id="com.gmarkham.cana" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
     <name>Cana</name>
     <description>
         Cana is an app to help you hang out with your friends!
     </description>
-    <author email="markhamg7@gmail.com" href="http://blog.gmarkham.com">
+    <author email="markhamg7@gmail.com" href="http://www.gmarkham.com">
         George Markham
     </author>
     <content src="index.html" />

@@ -47,19 +47,19 @@
   },
   "installed_plugins": {
     "cordova-plugin-camera": {
-      "PACKAGE_NAME": "com.gmarkham.com"
+      "PACKAGE_NAME": "com.gmarkham.cana"
     },
     "cordova-plugin-device": {
-      "PACKAGE_NAME": "com.gmarkham.com"
+      "PACKAGE_NAME": "com.gmarkham.cana"
     },
     "cordova-plugin-dialogs": {
-      "PACKAGE_NAME": "com.gmarkham.com"
+      "PACKAGE_NAME": "com.gmarkham.cana"
     },
     "cordova-plugin-statusbar": {
-      "PACKAGE_NAME": "com.gmarkham.com"
+      "PACKAGE_NAME": "com.gmarkham.cana"
     },
     "cordova-sqlite-storage": {
-      "PACKAGE_NAME": "com.gmarkham.com"
+      "PACKAGE_NAME": "com.gmarkham.cana"
     }
   },
   "dependent_plugins": {},

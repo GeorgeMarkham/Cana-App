@@ -51,7 +51,7 @@ label{
     font-size:1.2em !important;
     color:#FF3B30;
 }
-div#btns{
+div#login_btns_div{
     display:flex;
     flex-direction:column;
     height: 75px;
@@ -62,7 +62,7 @@ div#btns{
     left:0;
 }
 
-div#btns button{
+div#login_btns_div button{
     background: #FF3B30;
     color:#ffffff;
     border:none;
@@ -76,6 +76,75 @@ div#btns button{
 
 div#btns button#login_btn{
     background: #FF3B30;
+}
+
+div#signup_btns_div{
+    display:flex;
+    flex-direction:column;
+    height: 75px;
+    width:100%;
+    overflow:hidden;
+    position: fixed;
+    bottom:0px;
+    left:0;
+}
+
+div#signup_btns_div button{
+    background: #FF3B30;
+    color:#ffffff;
+    border:none;
+    font-weight:700;
+    text-shadow:none;
+    height: 75px;
+    width:100%;
+    font-size: 1.3em;
+    margin-bottom:-15px;
+}
+
+div#setup_btns_div{
+    display:flex;
+    flex-direction:column;
+    height: 75px;
+    width:100%;
+    overflow:hidden;
+    position: fixed;
+    bottom:0px;
+    left:0;
+}
+
+div#setup_btns_div button{
+    background: #FF3B30;
+    color:#ffffff;
+    border:none;
+    font-weight:700;
+    text-shadow:none;
+    height: 75px;
+    width:100%;
+    font-size: 1.3em;
+    margin-bottom:-15px;
+}
+
+div#search_btns_div{
+    display:flex;
+    flex-direction:column;
+    height: 75px;
+    width:100%;
+    overflow:hidden;
+    position: fixed;
+    bottom:0px;
+    left:0;
+}
+
+div#search_btns_div button{
+    background: #FF3B30;
+    color:#ffffff;
+    border:none;
+    font-weight:700;
+    text-shadow:none;
+    height: 75px;
+    width:100%;
+    font-size: 1.3em;
+    margin-bottom:-15px;
 }
 
 form{
@@ -235,6 +304,10 @@ ul#friends_list_view{
     -moz-transition: -moz-transform 200ms ease !important;
     -o-transition: -moz-transform 200ms ease !important;
     transition: transform 200ms ease !important;
+}
+
+button#add_friend_btn{
+    background-color: lightgray;
 }
 
 #user_search_input {

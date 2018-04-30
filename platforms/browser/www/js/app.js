@@ -143,13 +143,43 @@ function deviceReady(){
         }
     });
 
+
+    $("#search_page_btn").on('vclick', (event)=>{
+        $.mobile.changePage('#search_page');
+    })
+
+
+    //Search for a user on keyboard input
+    $('#user_search_input').on('keyup', (e)=>{
+        $('#search_results').html('');
+        var search_term =  $('#user_search_input').val();
+        friends_ref = firebase.database().ref('users').orderByChild('username').limitToFirst(1).equalTo(search_term).once('value', (snapshot) => {
+            if(snapshot.val() != null){
+                var user_obj = snapshot.toJSON()
+                var uid = Object.keys(user_obj)[0]
+                var username = user_obj[uid]['username']
+                $('#search_results').html('');
+                $('#search_results').append('<li>' + username + '</li>');
+                $("#add_friend_btn").css("background-color", "#FF3B30");
+                $("#add_friend_btn").attr('data-uid', uid);
+                $("#add_friend_btn").attr('data-username', username);
+            } else {
+                $("#add_friend_btn").css("background-color", "lightgray")
+            }
+        });
+    })
+    
+    $("#add_friend_btn").on('vclick', (event)=>{
+        var uid = $("#add_friend_btn").attr('data-uid');
+        var username = $("#add_friend_btn").attr('data-username');
+    });
+
     //Page Events
 
     $('#setup_page').on('pageshow', (e) => {
         var file_num = Math.floor(Math.random()*3);
         $('#profile_pic_input').css('background-image', 'url(../imgs/profile_pics/' + file_num + '.png)');
     })
-
     $('#home_page').on('pageshow', (e) => {
 
         var file_num = Math.floor(Math.random()*3);
@@ -160,6 +190,18 @@ function deviceReady(){
         
         /* This should never be false but just to make sure*/
         if(user){
+            console.log(user.uid);
+            friends_ref = firebase.database().ref('users/' +  user.uid).child('friends');
+            friends_ref.once("value", (snapshot) => {
+                console.log("hi");
+                snapshot.forEach((friend) => {
+                    console.log(friend.key + ": " + friend.val().name);
+                    friend_name = friend.val().name;
+                    $('#friends_list_view').append("<span><i class='fa fa-user-circle-o'></i></span><li data-name='" + friend_name + "' data-swiped='false' id='"+friend_name+"'>"+ friend_name + "</li>");
+                });
+            }, (err)=>{
+                console.log(err);
+            });
             //Set profile pic
             if(typeof(localStorage) != "undefined"){
                 if(localStorage.getItem(user.uid+".profile_pic")){
@@ -183,13 +225,6 @@ function deviceReady(){
                     });
                 }
             }
-
-            //Populate friends list from array
-            var friends = ['Chandler', 'Joey', 'Pheobe', 'Monica', 'Rachel', 'Ross', 'Tom', 'Jack']; //Default friends for testing
-            friends.forEach(friend => {
-                $('#friends_list_view').append("<span><i class='fa fa-user-circle-o'></i></span><li data-name='" + friend + "' data-swiped='false' id='"+friend+"'>"+ friend + "</li>");
-            });
-
         } else {
             $.mobile.changePage('#login_page');
         }
@@ -199,14 +234,29 @@ function deviceReady(){
 
 $('#friends_list_view').on('click', 'li', (event) => {
     var friend_name = $('#' + event.target.id).attr('data-name');
-    navigator.notification.alert(
-        friend_name,  // message
-        ()=>{
-            //do nothing
-        }, // callback
-        friend_name, // title
-        'Done' // buttonName
-    );
+
+    //Get current location
+    navigator.geolocation.getCurrentPosition((location)=>{
+        var location_str = location.coords.latitude + ";" + location.coords.longitude;
+        var location_obj = {
+            latitude: location.coords.latitude,
+            longitude: location.coords.longitude
+        };
+        //Success
+        //Send a message to a user
+        var locations_ref = firebase.database().ref().child('locations');
+        navigator.notification.alert(
+            location_str,  // message
+            ()=>{
+                //do nothing
+            }, // callback
+            friend_name, // title
+            'Done' // buttonName
+        );
+    }, (err)=>{
+        //error
+        console.log(err);
+    });
     //$.mobile.changePage("#friend_page", data : {''})
 })
 
@@ -228,3 +278,9 @@ $('#friends_list_view').on('swiperight', 'li', (event) => {
        var swiped = $('#' + event.target.id).attr('data-swiped', 'false')
     }
 })
+
+//Get Firebase Data
+friends_ref = firebase.database().ref('users/' +  user.uid).child('friends');
+snapshot.forEach((friend) => {
+    console.log(friend.key + ": " + JSON.stringify(friend.val()));
+});

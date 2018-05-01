@@ -19,9 +19,6 @@
     "cordova-plugin-statusbar": {
       "PACKAGE_NAME": "com.gmarkham.cana"
     },
-    "cordova-sqlite-storage": {
-      "PACKAGE_NAME": "com.gmarkham.cana"
-    },
     "phonegap-plugin-push": {
       "PACKAGE_NAME": "com.gmarkham.cana"
     }

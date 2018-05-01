@@ -11,9 +11,10 @@
       "cordova-plugin-statusbar": {},
       "cordova-plugin-device": {},
       "cordova-plugin-dialogs": {},
-      "cordova-sqlite-storage": {},
       "cordova-plugin-camera": {},
-      "phonegap-plugin-push": {}
+      "phonegap-plugin-push": {
+        "SENDER_ID": "1:228293665430:android:df201d13e7261425"
+      }
     }
   },
   "dependencies": {
@@ -23,7 +24,6 @@
     "cordova-plugin-device": "^2.0.1",
     "cordova-plugin-dialogs": "^2.0.1",
     "cordova-plugin-statusbar": "^2.4.1",
-    "cordova-sqlite-storage": "^2.2.1",
     "phonegap-plugin-push": "^2.2.2"
   }
 }

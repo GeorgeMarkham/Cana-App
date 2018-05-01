@@ -1,5 +1,5 @@
-//document.addEventListener('deviceready', deviceReady(), false);
-$().ready(deviceReady());
+document.addEventListener('deviceready', deviceReady(), false);
+//$().ready(deviceReady());
 
 function deviceReady(){
     console.log("Device ready!");
@@ -27,36 +27,44 @@ function deviceReady(){
 
 
     // Push notifications https://github.com/phonegap/phonegap-plugin-push/blob/master/docs/EXAMPLES.md & https://blog.phonegap.com/announcing-phonegap-push-plugin-version-2-0-0-fd165349508f
-    const push = PushNotification.init({
-        android: {
-            "senderID": "AIzaSyDAa7z8Jo_pWHKqPsFFSotxYcf_w9PiaNY"
+    var push = PushNotification.init({
+        "android": {
+            //"senderID": "228293665430"
         },
-        browser: {
-            pushServiceURL: 'http://push.api.phonegap.com/v1/push'
+        "browser": {
+            "pushServiceURL": 'http://push.api.phonegap.com/v1/push'
         },
-        ios: {
-            alert: "true",
-            badge: "true",
-            sound: "true"
+        "ios": {
+            // "sound": true,
+            // "vibration": true,
+            // "badge": true
         },
-        windows: {}
+        "windows": {}
     });
     
-    push.on('registration', (data) => {
-        console.log("registration event: " + data.registrationId);
+    push.on('registration', function(data) {
+        console.log('registration event: ' + data.registrationId);
+
+        var oldRegId = localStorage.getItem('registrationId');
+        if (oldRegId !== data.registrationId) {
+        // Save new registration ID
+        localStorage.setItem('registrationId', data.registrationId);
+        // Post registrationId to your app server as the value has changed
+        }
     });
     
-    push.on('notification', (data) => {
-        // data.message,
-        // data.title,
-        // data.count,
-        // data.sound,
-        // data.image,
-        // data.additionalData
+    push.on('notification', function(data) {
+        console.log('notification event');
+        navigator.notification.alert(
+            data.message,         // message
+            null,                 // callback
+            data.title,           // title
+            'Ok'                  // buttonName
+        );
     });
     
-    push.on('error', (e) => {
-        // e.message
+    push.on('error', function(e) {
+        console.log("push error = " + e.message);
     });
 
     //Observe user state
@@ -90,7 +98,7 @@ function deviceReady(){
         e.preventDefault();
         var email_input = $('#login_email_input');
         var password_input = $('#login_password_input');
-
+        alert("login btn");
         firebase.auth().signInWithEmailAndPassword(email_input.val(), password_input.val()).catch((error) => {
             console.log(error.code + ": " + error.message);
         });

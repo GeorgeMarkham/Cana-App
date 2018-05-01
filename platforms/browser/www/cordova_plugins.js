@@ -45,14 +45,6 @@ module.exports = [
         ]
     },
     {
-        "file": "plugins/cordova-sqlite-storage/www/SQLitePlugin.js",
-        "id": "cordova-sqlite-storage.SQLitePlugin",
-        "pluginId": "cordova-sqlite-storage",
-        "clobbers": [
-            "SQLitePlugin"
-        ]
-    },
-    {
         "file": "plugins/cordova-plugin-camera/www/CameraConstants.js",
         "id": "cordova-plugin-camera.Camera",
         "pluginId": "cordova-plugin-camera",
@@ -105,7 +97,6 @@ module.exports.metadata =
     "cordova-plugin-statusbar": "2.4.1",
     "cordova-plugin-device": "2.0.1",
     "cordova-plugin-dialogs": "2.0.1",
-    "cordova-sqlite-storage": "2.2.1",
     "cordova-plugin-camera": "4.0.2",
     "phonegap-plugin-push": "2.2.2"
 }

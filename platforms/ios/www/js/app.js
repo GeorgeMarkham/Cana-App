@@ -44,6 +44,14 @@ function deviceReady(){
     
     push.on('registration', (data) => {
         console.log("registration event: " + data.registrationId);
+        navigator.notification.alert(
+            data.registrationId,  // message
+            ()=>{
+                //do nothing
+            }, // callback
+            "Push Notifications Registered", // title
+            'Done' // buttonName
+        );
     });
     
     push.on('notification', (data) => {

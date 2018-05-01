@@ -1,5 +1,5 @@
-document.addEventListener('deviceready', deviceReady(), false);
-//$().ready(deviceReady());
+//document.addEventListener('deviceready', deviceReady(), false);
+$().ready(deviceReady());
 
 function deviceReady(){
     console.log("Device ready!");
@@ -27,45 +27,45 @@ function deviceReady(){
 
 
     // Push notifications https://github.com/phonegap/phonegap-plugin-push/blob/master/docs/EXAMPLES.md & https://blog.phonegap.com/announcing-phonegap-push-plugin-version-2-0-0-fd165349508f
-    var push = PushNotification.init({
-        "android": {
-            //"senderID": "228293665430"
-        },
-        "browser": {
-            "pushServiceURL": 'http://push.api.phonegap.com/v1/push'
-        },
-        "ios": {
-            // "sound": true,
-            // "vibration": true,
-            // "badge": true
-        },
-        "windows": {}
-    });
+    // var push = PushNotification.init({
+    //     "android": {
+    //         //"senderID": "228293665430"
+    //     },
+    //     "browser": {
+    //         "pushServiceURL": 'http://push.api.phonegap.com/v1/push'
+    //     },
+    //     "ios": {
+    //         // "sound": true,
+    //         // "vibration": true,
+    //         // "badge": true
+    //     },
+    //     "windows": {}
+    // });
     
-    push.on('registration', function(data) {
-        console.log('registration event: ' + data.registrationId);
+    // push.on('registration', function(data) {
+    //     console.log('registration event: ' + data.registrationId);
 
-        var oldRegId = localStorage.getItem('registrationId');
-        if (oldRegId !== data.registrationId) {
-        // Save new registration ID
-        localStorage.setItem('registrationId', data.registrationId);
-        // Post registrationId to your app server as the value has changed
-        }
-    });
+    //     var oldRegId = localStorage.getItem('registrationId');
+    //     if (oldRegId !== data.registrationId) {
+    //     // Save new registration ID
+    //     localStorage.setItem('registrationId', data.registrationId);
+    //     // Post registrationId to your app server as the value has changed
+    //     }
+    // });
     
-    push.on('notification', function(data) {
-        console.log('notification event');
-        navigator.notification.alert(
-            data.message,         // message
-            null,                 // callback
-            data.title,           // title
-            'Ok'                  // buttonName
-        );
-    });
+    // push.on('notification', function(data) {
+    //     console.log('notification event');
+    //     navigator.notification.alert(
+    //         data.message,         // message
+    //         null,                 // callback
+    //         data.title,           // title
+    //         'Ok'                  // buttonName
+    //     );
+    // });
     
-    push.on('error', function(e) {
-        console.log("push error = " + e.message);
-    });
+    // push.on('error', function(e) {
+    //     console.log("push error = " + e.message);
+    // });
 
     //Observe user state
     firebase.auth().onAuthStateChanged((user) => {
@@ -92,13 +92,16 @@ function deviceReady(){
             return snapshot.val();
         });
     }
-
+    $(document).on('vclick', 'div', (event)=>{
+        console.log(event.target.id);
+    })
     //Buttons
     $('#login_btn').on('vclick', (e)=>{
-        e.preventDefault();
+        //e.preventDefault();
         var email_input = $('#login_email_input');
         var password_input = $('#login_password_input');
-        alert("login btn");
+        console.log(email_input.val());
+        console.log(password_input.val());
         firebase.auth().signInWithEmailAndPassword(email_input.val(), password_input.val()).catch((error) => {
             console.log(error.code + ": " + error.message);
         });
@@ -236,7 +239,7 @@ function deviceReady(){
     $('#setup_page').on('pageshow', (e) => {
         var file_num = Math.floor(Math.random()*3);
         $('#profile_pic_input').css('background-image', 'url(../imgs/profile_pics/' + file_num + '.png)');
-    })
+    });
     $('#home_page').on('pageshow', (e) => {
 
         var file_num = Math.floor(Math.random()*3);
@@ -251,6 +254,7 @@ function deviceReady(){
             friends_ref = firebase.database().ref('users/' +  user.uid).child('friends');
             friends_ref.once("value", (snapshot) => {
                 console.log("hi");
+                $('#friends_list_view').html('');
                 snapshot.forEach((friend) => {
                     friend_name = friend.val().username;
                     console.log(friend.key + ": " + friend_name);
@@ -287,9 +291,7 @@ function deviceReady(){
         }
     });
 
-}
-
-$('#friends_list_view').on('click', 'li', (event) => {
+$('#friends_list_view').on('vclick', 'li', (event) => {
     var friend_name = $('#' + event.target.id).attr('data-name');
 
     //Get current location
@@ -319,6 +321,7 @@ $('#friends_list_view').on('click', 'li', (event) => {
 
 $('#friends_list_view').on('swipeleft', 'li', (event) => {
     //var swiped = event.target.attributes[1].nodeValue;
+    console.log("swiped left");
     var swiped = $('#' + event.target.id).attr('data-swiped')
     $('*[data-swiped="true"]').css({transform: ""});
     $('*[data-swiped="true"]').attr('data-swiped', 'false')
@@ -329,6 +332,7 @@ $('#friends_list_view').on('swipeleft', 'li', (event) => {
 })
 $('#friends_list_view').on('swiperight', 'li', (event) => {
     //var swiped = event.target.attributes[1].nodeValue;
+    console.log("swiped right");
     var swiped = $('#' + event.target.id).attr('data-swiped')
     if(swiped == 'true'){
        $('#' + event.target.id).css({transform: ""});
@@ -337,7 +341,10 @@ $('#friends_list_view').on('swiperight', 'li', (event) => {
 })
 
 //Get Firebase Data
-friends_ref = firebase.database().ref('users/' +  firebase.auth().currentUser.uid).child('friends');
-snapshot.forEach((friend) => {
-    console.log(friend.key + ": " + JSON.stringify(friend.val()));
-});
+if(firebase.auth().currentUser){
+    friends_ref = firebase.database().ref('users/' +  firebase.auth().currentUser.uid).child('friends');
+    // snapshot.forEach((friend) => {
+    //     console.log(friend.key + ": " + JSON.stringify(friend.val()));
+    // });
+}
+}

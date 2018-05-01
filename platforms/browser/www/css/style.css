@@ -51,16 +51,6 @@ label{
     font-size:1.2em !important;
     color:#FF3B30;
 }
-div#login_btns_div{
-    display:flex;
-    flex-direction:column;
-    height: 75px;
-    width:100%;
-    overflow:hidden;
-    position: fixed;
-    bottom:0px;
-    left:0;
-}
 
 div#btns{
     display:flex;

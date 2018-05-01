@@ -89,6 +89,14 @@ module.exports = [
         "clobbers": [
             "PushNotification"
         ]
+    },
+    {
+        "file": "plugins/cordova-plugin-firebase-realtime/www/browser/FirebaseRealtime.js",
+        "id": "cordova-plugin-firebase-realtime.FirebaseRealtime",
+        "pluginId": "cordova-plugin-firebase-realtime",
+        "merges": [
+            "cordova.plugins.firebase.realtime"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -98,7 +106,8 @@ module.exports.metadata =
     "cordova-plugin-device": "2.0.1",
     "cordova-plugin-dialogs": "2.0.1",
     "cordova-plugin-camera": "4.0.2",
-    "phonegap-plugin-push": "2.2.2"
+    "phonegap-plugin-push": "2.2.2",
+    "cordova-plugin-firebase-realtime": "0.0.2"
 }
 // BOTTOM OF METADATA
 });

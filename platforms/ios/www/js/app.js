@@ -16,6 +16,43 @@ function deviceReady(){
     
     var profile_pic_url = "";
     
+    // Push notifications https://github.com/phonegap/phonegap-plugin-push/blob/master/docs/EXAMPLES.md & https://blog.phonegap.com/announcing-phonegap-push-plugin-version-2-0-0-fd165349508f
+    // const push = PushNotification.init({
+    //     android: {},
+    //     browser: {
+    //         pushServiceURL: 'http://push.api.phonegap.com/v1/push'
+    //     },
+    //     ios: {
+    //         alert: "true",
+    //         badge: "true",
+    //         sound: "true"
+    //     },
+    //     windows: {}
+    // });
+    
+    // push.on('registration', (data) => {
+    //     // data.registrationId
+    //     navigator.notification.alert(
+    //         data.registrationId,
+    //         ()=>{},
+    //         data.registrationId,
+    //         "Thanks"
+    //     );
+    // });
+    
+    // push.on('notification', (data) => {
+    //     // data.message,
+    //     // data.title,
+    //     // data.count,
+    //     // data.sound,
+    //     // data.image,
+    //     // data.additionalData
+    // });
+    
+    // push.on('error', (e) => {
+    //     // e.message
+    // });
+
     //Firebase storage references
     // Get a reference to the storage service, which is used to create references in your storage bucket
     var storage = firebase.storage();
@@ -26,46 +63,13 @@ function deviceReady(){
     var imagesRef = storageRef.child('images');
 
 
-    // Push notifications https://github.com/phonegap/phonegap-plugin-push/blob/master/docs/EXAMPLES.md & https://blog.phonegap.com/announcing-phonegap-push-plugin-version-2-0-0-fd165349508f
-    // var push = PushNotification.init({
-    //     "android": {
-    //         //"senderID": "228293665430"
-    //     },
-    //     "browser": {
-    //         "pushServiceURL": 'http://push.api.phonegap.com/v1/push'
-    //     },
-    //     "ios": {
-    //         // "sound": true,
-    //         // "vibration": true,
-    //         // "badge": true
-    //     },
-    //     "windows": {}
-    // });
-    
-    // push.on('registration', function(data) {
-    //     console.log('registration event: ' + data.registrationId);
 
-    //     var oldRegId = localStorage.getItem('registrationId');
-    //     if (oldRegId !== data.registrationId) {
-    //     // Save new registration ID
-    //     localStorage.setItem('registrationId', data.registrationId);
-    //     // Post registrationId to your app server as the value has changed
-    //     }
-    // });
-    
-    // push.on('notification', function(data) {
-    //     console.log('notification event');
-    //     navigator.notification.alert(
-    //         data.message,         // message
-    //         null,                 // callback
-    //         data.title,           // title
-    //         'Ok'                  // buttonName
-    //     );
-    // });
-    
-    // push.on('error', function(e) {
-    //     console.log("push error = " + e.message);
-    // });
+    if(firebase.auth().currentUser){
+        friends_ref = firebase.database().ref('users/');
+        friends_ref.on('value', (snapshot)=>{
+            console.log(snapshot.val());
+        });
+    }
 
     //Observe user state
     firebase.auth().onAuthStateChanged((user) => {
@@ -86,15 +90,13 @@ function deviceReady(){
         }
     });
     
+
     //Get user data
     function getUserData(userId){
         firebase.database().ref('/users/' + userId).once('value').then((snapshot) => {
             return snapshot.val();
         });
     }
-    $(document).on('vclick', 'div', (event)=>{
-        console.log(event.target.id);
-    })
     //Buttons
     $('#login_btn').on('vclick', (e)=>{
         //e.preventDefault();
@@ -139,7 +141,14 @@ function deviceReady(){
             $('#profile_pic_input').css('background-image', 'url(data:image/jpeg;base64,' + imgData + ')');
         }, (err)=>{
             console.log(err);
-            alert("Something didn't go to plan, try again!");
+            navigator.notification.alert(
+                "Something didn't go to plan, try again!",  // message
+                ()=>{
+                    //do nothing
+                }, // callback
+                "Error", // title
+                'Done' // buttonName
+            );
         }, {
             sourceType: 0
         });
@@ -171,14 +180,28 @@ function deviceReady(){
                                 $.mobile.changePage('#home_page');
                             }).catch((err)=>{
                                 console.log(err);
-                                alert("Somethings not quite right, try again in a minute!");
+                                navigator.notification.alert(
+                                    "Something's not quite right, try again in a minute!",  // message
+                                    ()=>{
+                                        //do nothing
+                                    }, // callback
+                                    "Error", // title
+                                    'Done' // buttonName
+                                );
                             });
                         });
                         }).catch((err)=>{
                             console.log(err);
                         })
                     } else {
-                        alert("That username is so good it's already been taken, try something different");
+                        navigator.notification.alert(
+                            "That username is so good it's already been taken, try something different",  // message
+                            ()=>{
+                                //do nothing
+                            }, // callback
+                            "Error", // title
+                            'Done' // buttonName
+                        );
                     }
                     ret = true;
                 }).catch((err)=>{
@@ -243,7 +266,8 @@ function deviceReady(){
     $('#home_page').on('pageshow', (e) => {
 
         var file_num = Math.floor(Math.random()*3);
-        $('#profile_pic').attr('src', './imgs/profile_pics/' + file_num + '.png')
+        // $('#profile_btn').attr('src', './imgs/profile_pics/' + file_num + '.png')
+        $('#profile_btn').css('background-image', 'url(./imgs/profile_pics/' + file_num + '.png)')
 
         //Grab the user object
         var user = firebase.auth().currentUser;
@@ -257,8 +281,9 @@ function deviceReady(){
                 $('#friends_list_view').html('');
                 snapshot.forEach((friend) => {
                     friend_name = friend.val().username;
+                    friend_uid = friend.key;
                     console.log(friend.key + ": " + friend_name);
-                    $('#friends_list_view').append("<span><i class='fa fa-user-circle-o fa-lg'></i></span><li data-name='" + friend_name + "' data-swiped='false' id='"+friend_name+"'>"+ friend_name + "</li>");
+                    $('#friends_list_view').append("<span><i class='fa fa-user-circle-o fa-lg'></i></span><li data-name='" + friend_name + "' data-uid ='" + friend_uid + "' data-swiped='false' id='"+friend_name+"'>"+ friend_name + "</li>");
                 });
             }, (err)=>{
                 console.log(err);
@@ -266,16 +291,17 @@ function deviceReady(){
             //Set profile pic
             if(typeof(localStorage) != "undefined"){
                 if(localStorage.getItem(user.uid+".profile_pic")){
-                    document.getElementById('profile_pic').setAttribute(
-                        'src', 'data:image/png;base64,' + localStorage.getItem(user.uid+".profile_pic")
-                    );
+                    $('#profile_btn').css('background-image', 'url(data:image/png;base64,' + localStorage.getItem(user.uid+'.profile_pic') + ')');
+                    // document.getElementById('profile_pic').setAttribute(
+                    //     'src', 'data:image/png;base64,' + localStorage.getItem(user.uid+".profile_pic")
+                    // );
                 } else {
                     var profile_pic_ref = storage.refFromURL(user.photoURL);
                     profile_pic_ref.getDownloadURL().then((url)=>{
                         /*document.getElementById('profile_pic').setAttribute(
                             'src', url
                         );*/
-                        $('#profile_pic').attr('src', url)
+                        $('#profile_btn').css('background-image', 'url('+ url + ')');
                         //Maybe get image as bas64 string and save to local storage to save constantly downloading the image?
                     }).catch((err)=>{
                         console.log(err);
@@ -293,7 +319,7 @@ function deviceReady(){
 
 $('#friends_list_view').on('vclick', 'li', (event) => {
     var friend_name = $('#' + event.target.id).attr('data-name');
-
+    var friend_uid = $('#' + event.target.id).attr('data-uid');
     //Get current location
     navigator.geolocation.getCurrentPosition((location)=>{
         var location_str = location.coords.latitude + ";" + location.coords.longitude;
@@ -303,21 +329,50 @@ $('#friends_list_view').on('vclick', 'li', (event) => {
         };
         //Success
         //Send a message to a user
-        var locations_ref = firebase.database().ref().child('locations');
-        navigator.notification.alert(
-            location_str,  // message
-            ()=>{
-                //do nothing
-            }, // callback
-            friend_name, // title
-            'Done' // buttonName
-        );
+        var locations_ref = firebase.database().ref().child('users').child(friend_uid).child('friends').child(firebase.auth().currentUser.uid).child('location');
+        locations_ref.set(location_obj, (error) => {
+            if (error) {
+                navigator.notification.alert(
+                    "We couldn't send your location, sorry!",  // message
+                    ()=>{
+                        //do nothing
+                    }, // callback
+                    "Error", // title
+                    'Done' // buttonName
+                );
+                console.log(error);
+            } else {
+            navigator.notification.alert(
+                "Sent your location to " + friend_name,  // message
+                ()=>{
+                    //do nothing
+                }, // callback
+                "Location Sent!", // title
+                'Done' // buttonName
+            );
+            }
+        });
+        
     }, (err)=>{
         //error
         console.log(err);
     });
-    //$.mobile.changePage("#friend_page", data : {''})
 })
+
+$('#profile_btn').on('vclick', (event)=>{
+    // console.log("Profile pic click");
+    // navigator.notification.alert(
+    //     "I'll show you the settings page in a bit",
+    //     ()=>{},
+    //     "🥝",
+    //     "Okedoke"
+    // );
+    $.mobile.changePage('#settings_page');
+})
+
+$('#back_btn').on('click', (event)=>{
+    $.mobile.back();
+});
 
 $('#friends_list_view').on('swipeleft', 'li', (event) => {
     //var swiped = event.target.attributes[1].nodeValue;
@@ -347,4 +402,20 @@ if(firebase.auth().currentUser){
     //     console.log(friend.key + ": " + JSON.stringify(friend.val()));
     // });
 }
+}
+
+//Listen for locations
+if(firebase.auth().currentUser){
+    friends_ref = firebase.database().ref('users/' +  firebase.auth().currentUser.uid).child('friends');
+    friends_ref.on('child_changed', (snapshot)=>{
+        console.log(snapshot.val());
+        navigator.notification.alert(
+            snapshot.val(),  // message
+            ()=>{
+                //do nothing
+            }, // callback
+            "Location Recieved!", // title
+            'Done' // buttonName
+        );
+    })
 }

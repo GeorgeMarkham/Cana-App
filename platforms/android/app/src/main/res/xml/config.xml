@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.gmarkham.cana" version="1.0.0" versionCode="10" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
+    <feature name="Camera">
+        <param name="android-package" value="org.apache.cordova.camera.CameraLauncher" />
+    </feature>
+    <feature name="Device">
+        <param name="android-package" value="org.apache.cordova.device.Device" />
+    </feature>
+    <feature name="Notification">
+        <param name="android-package" value="org.apache.cordova.dialogs.Notification" />
+    </feature>
+    <feature name="StatusBar">
+        <param name="android-package" value="org.apache.cordova.statusbar.StatusBar" />
+        <param name="onload" value="true" />
+    </feature>
+    <feature name="FirebaseRealtime">
+        <param name="android-package" value="uk.co.tpplc.cordova.plugin.firebaserealtime.FirebaseRealtimePlugin" />
+        <param name="onload" value="false" />
+    </feature>
+    <name>Cana</name>
+    <description>
+        Cana is an app to help you hang out with your friends!
+    </description>
+    <author email="markhamg7@gmail.com" href="http://www.gmarkham.com">
+        George Markham
+    </author>
+    <content src="index.html" />
+    <icon src="www/icon.png" />
+    <splash src="www/splash.png" />
+    <access origin="*" />
+    <resource-file src="google-services.json" target="google-services.json" />
+    <preference name="loglevel" value="DEBUG" />
+    <preference name="DisallowOverscroll" value="true" />
+    <preference name="StatusBarBackgroundColor" value="#F0FF49" />
+    <preference name="StatusBarStyle" value="default" />
+</widget>

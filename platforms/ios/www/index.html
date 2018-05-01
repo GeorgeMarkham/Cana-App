@@ -78,7 +78,7 @@
         <div data-role="page" id="home_page">
             <div id="user_data">
                 <button id="search_page_btn" class="fa fa-search" style="vertical-align: middle;" aria-hidden="true"></button>
-                <img id="profile_pic"></img>
+                <button id="profile_btn"></button>
             </div>
             <div>
                 <h2>Your friends:</h2>
@@ -103,10 +103,10 @@
 
         <div data-role="page" id="settings_page">
             <header>
-                <h2>Settings</h2>
+                <button id="back_btn"><i class="fa fa-arrow-circle-o-left fa-lg" aria-hidden="true"></i></button><h2>Settings</h2>
             </header>
             <form>
-                <div id="setup_form" class="form-group">
+                <div id="settings_form" class="form-group">
                     <label for="username_input">Change your username</label>
                     <input data-enhance="false" type="text" class="form-control" id="change_username_input" placeholder="Username">
                     <label for="profile_pic_input">Change your profile picture</label>
@@ -114,7 +114,7 @@
                 </div>
             </form>
             <div id="btns" data-role="footer">
-                <button data-enhance="false" id="account_delete_btn" data-role="button" class="red-btn">Delete!</button>
+                <button data-enhance="false" id="account_delete_btn" data-role="button" class="red-btn">Delete Your Account!</button>
             </div>
         </div>
         

@@ -51,11 +51,12 @@
     <access origin="*" />
     <engine name="browser" spec="^5.0.3" />
     <engine name="ios" spec="^4.5.4" />
+    <engine name="android" spec="^7.0.0" />
     <plugin name="cordova-plugin-statusbar" spec="^2.4.1" />
     <plugin name="cordova-plugin-device" spec="^2.0.1" />
     <plugin name="cordova-plugin-dialogs" spec="^2.0.1" />
     <plugin name="cordova-plugin-camera" spec="^4.0.2" />
-    <plugin name="phonegap-plugin-push" spec="^2.2.2">
-        <variable name="SENDER_ID" value="1:228293665430:android:df201d13e7261425" />
+    <plugin name="phonegap-plugin-push" spec="^2.2.2" source="npm">
+        <variable name="SENDER_ID" value="228293665430" />
     </plugin>
 </widget>

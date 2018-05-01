@@ -63,8 +63,16 @@ function deviceReady(){
         // data.additionalData
     });
     
-    push.on('error', (e) => {
-        // e.message
+    push.on('error', (err) => {
+        // err.message
+        navigator.notification.alert(
+            err.message,  // message
+            ()=>{
+                //do nothing
+            }, // callback
+            "Push Notifications Error", // title
+            'Done' // buttonName
+        );
     });
 
     //Observe user state

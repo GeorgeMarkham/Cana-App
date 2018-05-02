@@ -19,14 +19,10 @@
     "cordova-plugin-statusbar": {
       "PACKAGE_NAME": "com.gmarkham.cana"
     },
-    "cordova-plugin-firebase-realtime": {
-      "FIREBASE_VERSION": "11.6.0",
+    "phonegap-plugin-push": {
+      "FCM_VERSION": "11.0.1",
       "PACKAGE_NAME": "com.gmarkham.cana"
     }
   },
-  "dependent_plugins": {
-    "cordova-support-google-services": {
-      "PACKAGE_NAME": "com.gmarkham.cana"
-    }
-  }
+  "dependent_plugins": {}
 }

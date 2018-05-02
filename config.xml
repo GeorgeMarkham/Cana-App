@@ -11,12 +11,14 @@
     <preference name="DisallowOverscroll" value="true" />
     <preference name="StatusBarBackgroundColor" value="#F0FF49" />
     <preference name="StatusBarStyle" value="default" />
+    <preference name="android-minSdkVersion" value="22" />
     <feature name="StatusBar">
         <param name="ios-package" onload="true" value="CDVStatusBar" />
     </feature>
     <platform name="android">
         <resource-file src="google-services.json" target="google-services.json" />
     </platform>
+    <preference name="android-build-tool" value="gradle" />
     <platform name="ios">
         <resource-file src="GoogleService-Info.plist" />
         <icon height="57" platform="ios" src="www/res/icons/ios/icon.png" width="57" />
@@ -49,14 +51,13 @@
     <icon src="www/icon.png" />
     <splash src="www/splash.png" />
     <access origin="*" />
-    <engine name="browser" spec="^5.0.3" />
-    <engine name="ios" spec="^4.5.4" />
-    <engine name="android" spec="^7.0.0" />
     <plugin name="cordova-plugin-statusbar" spec="^2.4.1" />
     <plugin name="cordova-plugin-device" spec="^2.0.1" />
     <plugin name="cordova-plugin-dialogs" spec="^2.0.1" />
     <plugin name="cordova-plugin-camera" spec="^4.0.2" />
-    <plugin name="phonegap-plugin-push" spec="^2.2.2" source="npm">
-        <variable name="SENDER_ID" value="228293665430" />
+    <plugin name="phonegap-plugin-push" spec="^2.1.2">
+        <param name="SENDER_ID" value="228293665430" />
     </plugin>
+    <engine name="browser" spec="^5.0.3" />
+    <engine name="android" spec="^7.0.0" />
 </widget>

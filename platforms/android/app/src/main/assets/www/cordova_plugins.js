@@ -65,11 +65,11 @@ module.exports = [
     ]
   },
   {
-    "id": "cordova-plugin-firebase-realtime.FirebaseRealtime",
-    "file": "plugins/cordova-plugin-firebase-realtime/www/FirebaseRealtime.js",
-    "pluginId": "cordova-plugin-firebase-realtime",
-    "merges": [
-      "cordova.plugins.firebase.realtime"
+    "id": "phonegap-plugin-push.PushNotification",
+    "file": "plugins/phonegap-plugin-push/www/push.js",
+    "pluginId": "phonegap-plugin-push",
+    "clobbers": [
+      "PushNotification"
     ]
   }
 ];
@@ -80,8 +80,7 @@ module.exports.metadata =
   "cordova-plugin-device": "2.0.1",
   "cordova-plugin-dialogs": "2.0.1",
   "cordova-plugin-statusbar": "2.4.1",
-  "cordova-support-google-services": "1.0.0",
-  "cordova-plugin-firebase-realtime": "0.0.2"
+  "phonegap-plugin-push": "2.1.2"
 };
 // BOTTOM OF METADATA
 });

@@ -46,7 +46,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.security.SecureRandom;
+import java.util.Random;
 
 @SuppressLint("NewApi")
 public class FCMService extends FirebaseMessagingService implements PushConstants {
@@ -252,7 +252,8 @@ public class FCMService extends FirebaseMessagingService implements PushConstant
 
                 newExtras.putString(jsonKey, value);
               }
-            } else if (data.has(LOC_KEY) || data.has(LOC_DATA)) {
+            }
+            else if (data.has(LOC_KEY) || data.has(LOC_DATA)) {
               String newKey = normalizeKey(key, messageKey, titleKey);
               Log.d(LOG_TAG, "replace key " + key + " with " + newKey);
               replaceKey(context, key, newKey, extras, newExtras);
@@ -368,8 +369,7 @@ public class FCMService extends FirebaseMessagingService implements PushConstant
     notificationIntent.putExtra(PUSH_BUNDLE, extras);
     notificationIntent.putExtra(NOT_ID, notId);
 
-    SecureRandom random = new SecureRandom();
-    int requestCode = random.nextInt();
+    int requestCode = new Random().nextInt();
     PendingIntent contentIntent = PendingIntent.getActivity(this, requestCode, notificationIntent,
         PendingIntent.FLAG_UPDATE_CURRENT);
 
@@ -379,7 +379,7 @@ public class FCMService extends FirebaseMessagingService implements PushConstant
     dismissedNotificationIntent.putExtra(DISMISSED, true);
     dismissedNotificationIntent.setAction(PUSH_DISMISSED);
 
-    requestCode = random.nextInt();
+    requestCode = new Random().nextInt();
     PendingIntent deleteIntent = PendingIntent.getBroadcast(this, requestCode, dismissedNotificationIntent,
         PendingIntent.FLAG_CANCEL_CURRENT);
 
@@ -527,7 +527,7 @@ public class FCMService extends FirebaseMessagingService implements PushConstant
         for (int i = 0; i < actionsArray.length(); i++) {
           int min = 1;
           int max = 2000000000;
-          SecureRandom random = new SecureRandom();
+          Random random = new Random();
           int uniquePendingIntentRequestCode = random.nextInt((max - min) + 1) + min;
           Log.d(LOG_TAG, "adding action");
           JSONObject action = actionsArray.getJSONObject(i);
@@ -933,8 +933,6 @@ public class FCMService extends FirebaseMessagingService implements PushConstant
     SharedPreferences sharedPref = getApplicationContext().getSharedPreferences(PushPlugin.COM_ADOBE_PHONEGAP_PUSH,
         Context.MODE_PRIVATE);
     String savedSenderID = sharedPref.getString(SENDER_ID, "");
-
-    Log.d(LOG_TAG, "sender id = " + savedSenderID);
 
     return from.equals(savedSenderID) || from.startsWith("/topics/");
   }

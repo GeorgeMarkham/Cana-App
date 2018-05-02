@@ -1,8 +1,49 @@
-//document.addEventListener('deviceready', deviceReady(), false);
-$().ready(deviceReady());
+document.addEventListener('deviceready', deviceReady(), false);
+//$().ready(deviceReady());
 
 function deviceReady(){
-    console.log("Device ready!");
+
+    var push = PushNotification.init({
+        android: {
+        },
+        browser: {
+            pushServiceURL: 'http://push.api.phonegap.com/v1/push'
+        },
+        ios: {
+            alert: "true",
+            badge: "true",
+            sound: "true"
+        },
+        windows: {}
+    });
+    console.log(push);
+    if(push !== null){
+        //console.log(push);
+        push.on('registration', (data) => {
+            // data.registrationId
+            navigator.notification.alert(
+                data.registrationId,
+                ()=>{},
+                "Registered!",
+                "Okedoke"
+            );
+        });
+        
+        push.on('notification', (data) => {
+            // data.message,
+            // data.title,
+            // data.count,
+            // data.sound,
+            // data.image,
+            // data.additionalData
+        });
+        
+        push.on('error', (e) => {
+            // e.message
+        });
+    }
+   
+
     // Initialize Firebase
     var config = {
         apiKey: "AIzaSyDAa7z8Jo_pWHKqPsFFSotxYcf_w9PiaNY",
@@ -15,44 +56,6 @@ function deviceReady(){
     firebase.initializeApp(config);
     
     var profile_pic_url = "";
-    
-    // Push notifications https://github.com/phonegap/phonegap-plugin-push/blob/master/docs/EXAMPLES.md & https://blog.phonegap.com/announcing-phonegap-push-plugin-version-2-0-0-fd165349508f
-    // const push = PushNotification.init({
-    //     android: {},
-    //     browser: {
-    //         pushServiceURL: 'http://push.api.phonegap.com/v1/push'
-    //     },
-    //     ios: {
-    //         alert: "true",
-    //         badge: "true",
-    //         sound: "true"
-    //     },
-    //     windows: {}
-    // });
-    
-    // push.on('registration', (data) => {
-    //     // data.registrationId
-    //     navigator.notification.alert(
-    //         data.registrationId,
-    //         ()=>{},
-    //         data.registrationId,
-    //         "Thanks"
-    //     );
-    // });
-    
-    // push.on('notification', (data) => {
-    //     // data.message,
-    //     // data.title,
-    //     // data.count,
-    //     // data.sound,
-    //     // data.image,
-    //     // data.additionalData
-    // });
-    
-    // push.on('error', (e) => {
-    //     // e.message
-    // });
-
     //Firebase storage references
     // Get a reference to the storage service, which is used to create references in your storage bucket
     var storage = firebase.storage();
@@ -89,7 +92,6 @@ function deviceReady(){
             $.mobile.changePage('#login_page');
         }
     });
-    
 
     //Get user data
     function getUserData(userId){
@@ -396,26 +398,30 @@ $('#friends_list_view').on('swiperight', 'li', (event) => {
 })
 
 //Get Firebase Data
-if(firebase.auth().currentUser){
-    friends_ref = firebase.database().ref('users/' +  firebase.auth().currentUser.uid).child('friends');
-    // snapshot.forEach((friend) => {
-    //     console.log(friend.key + ": " + JSON.stringify(friend.val()));
-    // });
-}
-}
+// if(firebase.auth().currentUser){
+//     friends_ref = firebase.database().ref('users/' +  firebase.auth().currentUser.uid).child('friends');
+//     // snapshot.forEach((friend) => {
+//     //     console.log(friend.key + ": " + JSON.stringify(friend.val()));
+//     // });
+// }
+
 
 //Listen for locations
-if(firebase.auth().currentUser){
-    friends_ref = firebase.database().ref('users/' +  firebase.auth().currentUser.uid).child('friends');
-    friends_ref.on('child_changed', (snapshot)=>{
-        console.log(snapshot.val());
-        navigator.notification.alert(
-            snapshot.val(),  // message
-            ()=>{
-                //do nothing
-            }, // callback
-            "Location Recieved!", // title
-            'Done' // buttonName
-        );
-    })
+// if(firebase.auth().currentUser){
+//     friends_ref = firebase.database().ref('users/' +  firebase.auth().currentUser.uid).child('friends');
+//     friends_ref.on('child_changed', (snapshot)=>{
+//         console.log(snapshot.val());
+//         navigator.notification.alert(
+//             snapshot.val(),  // message
+//             ()=>{
+//                 //do nothing
+//             }, // callback
+//             "Location Recieved!", // title
+//             'Done' // buttonName
+//         );
+//     })
+// }
+
 }
+
+

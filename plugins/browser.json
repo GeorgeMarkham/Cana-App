@@ -21,9 +21,6 @@
     },
     "phonegap-plugin-push": {
       "PACKAGE_NAME": "com.gmarkham.cana"
-    },
-    "cordova-plugin-firebase-realtime": {
-      "PACKAGE_NAME": "com.gmarkham.cana"
     }
   },
   "dependent_plugins": {}

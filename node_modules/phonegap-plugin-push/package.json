@@ -1,28 +1,28 @@
 {
-  "_from": "phonegap-plugin-push@2.2.2",
-  "_id": "phonegap-plugin-push@2.2.2",
+  "_from": "phonegap-plugin-push@2.1.2",
+  "_id": "phonegap-plugin-push@2.1.2",
   "_inBundle": false,
-  "_integrity": "sha1-CU8D2Z+EGOBAU3Bx6z/KXxqU9FA=",
+  "_integrity": "sha1-9ke0wcOwL6vJTFsjWpFpZeF/Y0s=",
   "_location": "/phonegap-plugin-push",
   "_phantomChildren": {},
   "_requested": {
     "type": "version",
     "registry": true,
-    "raw": "phonegap-plugin-push@2.2.2",
+    "raw": "phonegap-plugin-push@2.1.2",
     "name": "phonegap-plugin-push",
     "escapedName": "phonegap-plugin-push",
-    "rawSpec": "2.2.2",
+    "rawSpec": "2.1.2",
     "saveSpec": null,
-    "fetchSpec": "2.2.2"
+    "fetchSpec": "2.1.2"
   },
   "_requiredBy": [
     "#USER",
     "/"
   ],
-  "_resolved": "https://registry.npmjs.org/phonegap-plugin-push/-/phonegap-plugin-push-2.2.2.tgz",
-  "_shasum": "094f03d99f8418e040537071eb3fca5f1a94f450",
-  "_spec": "phonegap-plugin-push@2.2.2",
-  "_where": "/Users/georgemarkham/Documents/cana",
+  "_resolved": "https://registry.npmjs.org/phonegap-plugin-push/-/phonegap-plugin-push-2.1.2.tgz",
+  "_shasum": "f647b4c1c3b02fabc94c5b235a916965e17f634b",
+  "_spec": "phonegap-plugin-push@2.1.2",
+  "_where": "C:\\Users\\George Markham\\Documents\\Cana-App",
   "author": {
     "name": "Adobe PhoneGap Team"
   },
@@ -71,9 +71,9 @@
         "cordova-android": ">=6.2.1",
         "cordova-ios": ">=4.4.0"
       },
-      "2.2.0": {
+      "2.1.2": {
         "cordova": ">=7.1.0",
-        "cordova-android": ">=7.1.0",
+        "cordova-android": ">=6.3.0",
         "cordova-ios": ">=4.5.0"
       },
       "<2.0.0": {
@@ -85,11 +85,6 @@
         "cordova": ">=7.1.0",
         "cordova-android": ">=6.3.0",
         "cordova-ios": ">=4.4.0"
-      },
-      "<2.2.0": {
-        "cordova": ">=7.1.0",
-        "cordova-android": ">=6.3.0",
-        "cordova-ios": ">=4.5.0"
       }
     }
   },
@@ -119,5 +114,5 @@
     "test": "npm run build && npm run jasmine"
   },
   "types": "./types/index.d.ts",
-  "version": "2.2.2"
+  "version": "2.1.2"
 }

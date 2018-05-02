@@ -36,9 +36,6 @@
     },
     "phonegap-plugin-push": {
       "PACKAGE_NAME": "com.gmarkham.cana"
-    },
-    "cordova-plugin-firebase-realtime": {
-      "PACKAGE_NAME": "com.gmarkham.cana"
     }
   },
   "dependent_plugins": {},
@@ -132,14 +129,6 @@
       "clobbers": [
         "PushNotification"
       ]
-    },
-    {
-      "file": "plugins/cordova-plugin-firebase-realtime/www/browser/FirebaseRealtime.js",
-      "id": "cordova-plugin-firebase-realtime.FirebaseRealtime",
-      "pluginId": "cordova-plugin-firebase-realtime",
-      "merges": [
-        "cordova.plugins.firebase.realtime"
-      ]
     }
   ],
   "plugin_metadata": {
@@ -147,7 +136,6 @@
     "cordova-plugin-device": "2.0.1",
     "cordova-plugin-dialogs": "2.0.1",
     "cordova-plugin-camera": "4.0.2",
-    "phonegap-plugin-push": "2.2.2",
-    "cordova-plugin-firebase-realtime": "0.0.2"
+    "phonegap-plugin-push": "2.1.2"
   }
 }

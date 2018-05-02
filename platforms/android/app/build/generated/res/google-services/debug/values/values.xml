@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_web_client_id" translatable="false">228293665430-ekbhm7htl9jqa04nks9u3t0unqpnhl89.apps.googleusercontent.com</string>
+    <string name="firebase_database_url" translatable="false">https://cana-app.firebaseio.com</string>
+    <string name="gcm_defaultSenderId" translatable="false">228293665430</string>
+    <string name="google_api_key" translatable="false">AIzaSyAtSiI7-wT4ZmbErXcMuKkJM4h1_s5WwTU</string>
+    <string name="google_app_id" translatable="false">1:228293665430:android:dd446f12a76fa3b0</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyAtSiI7-wT4ZmbErXcMuKkJM4h1_s5WwTU</string>
+    <string name="google_storage_bucket" translatable="false">cana-app.appspot.com</string>
+</resources>

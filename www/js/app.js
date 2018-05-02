@@ -1,46 +1,8 @@
-document.addEventListener('deviceready', deviceReady(), false);
-//$().ready(deviceReady());
+document.addEventListener('deviceready', onDeviceReady, false);
 
-function deviceReady(){
-
-    var push = PushNotification.init({
-        android: {
-        },
-        browser: {
-            pushServiceURL: 'http://push.api.phonegap.com/v1/push'
-        },
-        ios: {
-            alert: "true",
-            badge: "true",
-            sound: "true"
-        },
-        windows: {}
-    });
-    console.log(push);
-    push.on('registration', (data) => {
-        // data.registrationId
-        navigator.notification.alert(
-            data.registrationId,
-            ()=>{},
-            "Registered!",
-            "Okedoke"
-        );
-    });
-    
-    push.on('notification', (data) => {
-        // data.message,
-        // data.title,
-        // data.count,
-        // data.sound,
-        // data.image,
-        // data.additionalData
-    });
-    
-    push.on('error', (e) => {
-        // e.message
-    });
-   
-
+function onDeviceReady(){
+    console.log("Device Ready");
+    setupPush();
     // Initialize Firebase
     var config = {
         apiKey: "AIzaSyDAa7z8Jo_pWHKqPsFFSotxYcf_w9PiaNY",
@@ -422,3 +384,46 @@ $('#friends_list_view').on('swiperight', 'li', (event) => {
 }
 
 
+function setupPush() {
+    console.log('calling push init');
+    var push = PushNotification.init({
+        "android": {
+            "senderID": "228293665430"
+        },
+        "browser": {
+            pushServiceURL: 'http://push.api.phonegap.com/v1/push'
+        },
+        "ios": {
+            "sound": true,
+            "vibration": true,
+            "badge": true
+        },
+        "windows": {}
+    });
+    console.log('after init');
+
+    push.on('registration', function(data) {
+        console.log('registration event: ' + data.registrationId);
+        alert('registration event: ' + data.registrationId);
+        var oldRegId = localStorage.getItem('registrationId');
+        if (oldRegId !== data.registrationId) {
+            // Save new registration ID
+            localStorage.setItem('registrationId', data.registrationId);
+            // Post registrationId to your app server as the value has changed
+        }
+    });
+
+    push.on('error', function(e) {
+        console.log("push error = " + e.message);
+    });
+
+    push.on('notification', function(data) {
+        console.log('notification event');
+        navigator.notification.alert(
+            data.message,         // message
+            null,                 // callback
+            data.title,           // title
+            'Ok'                  // buttonName
+        );
+    });
+};

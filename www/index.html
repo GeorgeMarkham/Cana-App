@@ -39,7 +39,7 @@
                 <button data-enhance="false" id="login_btn" data-corners="false">Login</button>
             </div>
         </div>
-        <div data-role="page" id="signup_page">
+        <div data-role="page" id="signup_page" data-pagetype="main">
             <header>
                 <h1>Cana</h1>
             </header>
@@ -83,14 +83,12 @@
             <div>
                 <h2>Your friends:</h2>
                 <div id="friends_div">
-                    <ul data-role="listview" id="friends_list_view">
-                        <!-- <li><a>FRIEND NAME</a></li> -->
-                    </ul>
+                    <ul data-role="listview" id="friends_list_view"></ul>
                 </div>
             </div>
         </div>
 
-        <div data-role="page" id="search_page">
+        <div data-role="page" id="search_page" data-pagetype="main">
             <input type="text" placeholder="Search for a user" id="user_search_input" />
             <div>
                 <ul data-role="listview" id="search_results">
@@ -101,29 +99,34 @@
             </div>
         </div>
 
-        <div data-role="page" id="settings_page">
+        <div data-role="page" id="settings_page" data-pagetype="main">
             <header>
-                <button id="back_btn"><i class="fa fa-arrow-circle-o-left fa-lg" aria-hidden="true"></i></button><h2>Settings</h2>
+                <h2>Delete Your Account</h2>
             </header>
-            <form>
-                <div id="settings_form" class="form-group">
-                    <label for="username_input">Change your username</label>
-                    <input data-enhance="false" type="text" class="form-control" id="change_username_input" placeholder="Username">
-                    <label for="profile_pic_input">Change your profile picture</label>
-                    <input data-enhance="false" data-corners="true" type="button" class="form-control" id="change_profile_pic_input" placeholder="Profile pic">
-                </div>
-            </form>
+            <div>
+                <button data-enhance="false" data-role="button" class="red-btn" id="logout_btn">Logout</button>
+            </div>
             <div id="btns" data-role="footer">
-                <button data-enhance="false" id="account_delete_btn" data-role="button" class="red-btn">Delete Your Account!</button>
+                <button data-enhance="false" id="account_delete_btn" data-role="button" class="red-btn">Delete Your Account</button>
             </div>
         </div>
-        
+
+        <div data-role="page" id="friend_page" data-pagetype="main">
+            <div id="map"></div>
+            <div id="user_distance"></div>
+            <div id="btns" data-role="footer">
+                <button data-enhance="false" id="unfriend_btn" data-role="button" class="red-btn">Remove Friend!</button>
+            </div>
+        </div>
+
+        <canvas id="convert_img" style="display: none;"></canvas>
+
         <script src="./js/jquery-1.11.1.min.js"></script>
         <script src="./js/jqm_defualts.js"></script>
         <script src="./js/jquery.mobile-1.4.5.min.js"></script>
         <script src="./js/bootstrap.min.js"></script>
         <script src="./js/firebase.js"></script>
-        <script src="./js/jsrsasign-latest-all-min.js"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyACJ_PN69UEspr48pwkHQ3055rsg9KtAY8&callback=initMap"></script>
         <script src="./js/app.js"></script>
     </body>
 </html>

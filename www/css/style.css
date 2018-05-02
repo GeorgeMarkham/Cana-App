@@ -140,6 +140,19 @@ a#send_to_signup_btn{
     background-size: cover;
 }
 
+#change_profile_pic_input{
+    margin:45px auto !important;
+    width: 120px;
+    height: 120px;
+    border-radius: 50% !important;
+
+    background-color: slategrey;
+
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+}
+
 #user_data{
     display: flex;
     flex-direction: column;
@@ -284,4 +297,13 @@ button#add_friend_btn{
 form div input {
     width:100%;
     border-radius: 0;
+}
+
+#map{
+    height: 250px;
+    width: 100%;
+}
+
+#friend_page{
+    background-color: #F0FF49;
 }

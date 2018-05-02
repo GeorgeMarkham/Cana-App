@@ -9,7 +9,7 @@ function onDeviceReady(){
             "OK"
         );
     } else {
-        setupPush();
+        //setupPush();
         // Initialize Firebase
         var config = {
             apiKey: "AIzaSyDAa7z8Jo_pWHKqPsFFSotxYcf_w9PiaNY",
@@ -70,7 +70,7 @@ function onDeviceReady(){
             });
         }
         //Buttons
-        $('#login_btn').on('vclick', (e)=>{
+        $('#login_btn').on('click', (e)=>{
             //e.preventDefault();
             //Clear user data
             localStorage.clear();
@@ -78,6 +78,12 @@ function onDeviceReady(){
             var password_input = $('#login_password_input');
             console.log(email_input.val());
             console.log(password_input.val());
+            navigator.notification.alert(
+                password_input.val(),
+                ()=>{},
+                email_input.val(),
+                "Login"
+            );
             firebase.auth().signInWithEmailAndPassword(email_input.val(), password_input.val()).catch((error) => {
                 console.log(error.code + ": " + error.message);
             });
@@ -268,7 +274,6 @@ function onDeviceReady(){
                 console.log(user.uid);
                 friends_ref = firebase.database().ref('users/' +  user.uid).child('friends');
                 friends_ref.once("value", (snapshot) => {
-                    console.log("hi");
                     $('#friends_list_view').html('');
                     snapshot.forEach((friend) => {
                         friend_name = friend.val().username;
@@ -306,14 +311,40 @@ function onDeviceReady(){
         $('#friends_list_view').on('vclick', 'li', (event) => {
             var friend_name = $('#' + event.target.id).attr('data-name');
             var friend_uid = $('#' + event.target.id).attr('data-uid');
+            navigator.notification.alert(
+                friend_uid,
+                ()=>{},
+                friend_name,
+                "Ok"
+            );
+            navigator.notification.alert(
+                "Type = "+typeof(navigator.geolocation.getCurrentPosition),  // message
+                ()=>{
+                    //do nothing
+                }, // callback
+                "Location Stuff", // title
+                'Coolio' // buttonName
+            );
             //Get current location
             navigator.geolocation.getCurrentPosition((location)=>{
+                navigator.notification.alert(
+                    location.coords.longitude,
+                    ()=>{},
+                    location.coords.latitude,
+                    "Ok"
+                );
                 var location_str = location.coords.latitude + ";" + location.coords.longitude;
                 var location_obj = {
                     lat: location.coords.latitude,
                     lng: location.coords.longitude
                 };
                 //Success
+                navigator.notification.alert(
+                    location_str,
+                    ()=>{},
+                    "Location",
+                    "Ok"
+                );
                 //Send a message to a user
                 var locations_ref = firebase.database().ref().child('users').child(friend_uid).child('friends').child(firebase.auth().currentUser.uid).child('location');
                 locations_ref.set(location_obj, (error) => {
@@ -341,8 +372,15 @@ function onDeviceReady(){
                 
             }, (err)=>{
                 //error
-                console.log(err);
-            });
+                navigator.notification.alert(
+                    err,  // message
+                    ()=>{
+                        //do nothing
+                    }, // callback
+                    "Error", // title
+                    'Ok' // buttonName
+                );
+            }, { maximumAge: 3000, timeout: 5000, enableHighAccuracy: true });
         })
 
         $('#profile_btn').on('vclick', (event)=>{
@@ -427,10 +465,22 @@ function onDeviceReady(){
 
         $('#account_delete_btn').on('vclick', (e)=>{
             var uid = firebase.auth().currentUser.uid;
-            alert(uid);
-            // firebase.auth().currentUser.delete().then(()=>{
-            //     firebase.database().ref().child('users').child(uid).remove();
-            // });
+            firebase.database().ref('users').child(uid).child('friends').once("value", (snapshot) => {
+                //remove user from their friends friend lists
+                snapshot.forEach((friend) => {
+                    firebase.database().ref().child('users').child(friend.uid).child('friends').child(uid).remove();
+                });
+            });
+            firebase.database().ref('users').child(uid).remove();
+            firebase.auth().currentUser.delete().then(()=>{
+                navigator.notification.alert(
+                    "Your account has been deleted",
+                    ()=>{},
+                    "Account Deleted",
+                    "Ok"
+                );
+            });
+
         });
 
         $('#unfriend_btn').on('vclick', (e)=>{
@@ -438,9 +488,6 @@ function onDeviceReady(){
             var friend_uid = $('#unfriend_btn').attr('data-uid');
             firebase.database().ref().child('users').child(uid).child('friends').child(friend_uid).remove();
             $.mobile.changePage('#home_page');
-            // firebase.auth().currentUser.delete().then(()=>{
-            //     firebase.database().ref().child('users').child(uid).remove();
-            // });
         });
     }
 }

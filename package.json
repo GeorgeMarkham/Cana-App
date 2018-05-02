@@ -12,7 +12,7 @@
       "cordova-plugin-device": {},
       "cordova-plugin-dialogs": {},
       "cordova-plugin-camera": {},
-      "phonegap-plugin-push": {}
+      "cordova-plugin-geolocation": {}
     }
   },
   "dependencies": {
@@ -22,7 +22,7 @@
     "cordova-plugin-device": "^2.0.1",
     "cordova-plugin-dialogs": "^2.0.1",
     "cordova-plugin-fcm-plus": "git+https://github.com/guyromb/cordova-plugin-fcm-plus.git",
-    "cordova-plugin-statusbar": "^2.4.1",
-    "phonegap-plugin-push": "^2.1.2"
+    "cordova-plugin-geolocation": "^4.0.1",
+    "cordova-plugin-statusbar": "^2.4.1"
   }
 }

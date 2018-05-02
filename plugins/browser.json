@@ -19,7 +19,7 @@
     "cordova-plugin-camera": {
       "PACKAGE_NAME": "com.gmarkham.com"
     },
-    "phonegap-plugin-push": {
+    "cordova-plugin-geolocation": {
       "PACKAGE_NAME": "com.gmarkham.cana"
     }
   },

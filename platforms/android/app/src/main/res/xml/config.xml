@@ -13,8 +13,8 @@
         <param name="android-package" value="org.apache.cordova.statusbar.StatusBar" />
         <param name="onload" value="true" />
     </feature>
-    <feature name="PushNotification">
-        <param name="android-package" value="com.adobe.phonegap.push.PushPlugin" />
+    <feature name="Geolocation">
+        <param name="android-package" value="org.apache.cordova.geolocation.Geolocation" />
     </feature>
     <name>Cana</name>
     <description>
@@ -24,6 +24,21 @@
         George Markham
     </author>
     <content src="index.html" />
+    <edit-config file="*-Info.plist" mode="merge" target="NSCameraUsageDescription">
+        <string>User takes picture for profile image</string>
+    </edit-config>
+    <gap:config-file overwrite="true" parent="NSCameraUsageDescription" platform="ios">
+        <string>User takes picture for profile image</string>
+    </gap:config-file>
+    <edit-config file="*-Info.plist" mode="merge" target="NSPhotoLibraryUsageDescription">
+        <string>need photo library access to get pictures from there</string>
+    </edit-config>
+    <edit-config file="*-Info.plist" mode="merge" target="NSPhotoLibraryAddUsageDescription">
+        <string>need photo library access to save pictures there</string>
+    </edit-config>
+    <edit-config file="*-Info.plist" mode="merge" target="NSLocationWhenInUseUsageDescription">
+        <string>need location access to find things nearby</string>
+    </edit-config>
     <icon src="www/icon.png" />
     <splash src="www/splash.png" />
     <access origin="*" />

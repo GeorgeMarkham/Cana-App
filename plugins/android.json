@@ -19,8 +19,7 @@
     "cordova-plugin-statusbar": {
       "PACKAGE_NAME": "com.gmarkham.cana"
     },
-    "phonegap-plugin-push": {
-      "FCM_VERSION": "11.0.1",
+    "cordova-plugin-geolocation": {
       "PACKAGE_NAME": "com.gmarkham.cana"
     }
   },

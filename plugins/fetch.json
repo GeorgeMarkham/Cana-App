@@ -31,10 +31,10 @@
     "is_top_level": true,
     "variables": {}
   },
-  "phonegap-plugin-push": {
+  "cordova-plugin-geolocation": {
     "source": {
       "type": "registry",
-      "id": "phonegap-plugin-push@2.1.2"
+      "id": "cordova-plugin-geolocation@4.0.1"
     },
     "is_top_level": true,
     "variables": {}

@@ -7,6 +7,9 @@ h1, h2, h3, h4, h5, p, label{
     -webkit-box-shadow: none !important;
     box-shadow: none !important;
 }
+button{
+    border:none !important;
+}
 .ui-listview > .ui-li-static {
     overflow: initial;
     -webkit-transition: -webkit-transform 300ms ease;
@@ -99,6 +102,12 @@ a#send_to_signup_btn{
     background-color: #3B86CC;
 }
 
+#signup_page label{
+    color:#ffffff;
+    font-weight: 700;
+    text-align: center;
+}
+
 #home_page{
     height: 100%;
     margin: 0;
@@ -115,7 +124,17 @@ a#send_to_signup_btn{
     background: #FF3B30;
     color: #FFFFFF;
 }
-
+#setup_page{
+    height: 100%;
+    margin: 0;
+    color:#FFFFFF;
+    background-color: #3B86CC;
+}
+#setup_page label{
+    color:#ffffff;
+    font-weight: 700;
+    text-align: center;
+}
 #setup_form{
     display: flex;
     flex-direction: column;
@@ -151,6 +170,41 @@ a#send_to_signup_btn{
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
+}
+
+#settings_page{
+    height: 100%;
+    margin: 0;
+    color:#FFFFFF;
+    background-color: #3B86CC;
+    text-align: center;
+}
+
+#settings_page h2{
+    text-align: center;
+    width:100%;
+}
+
+#settings_page #profile_img{
+    margin:45px auto !important;
+    width: 120px;
+    height: 120px;
+    border-radius: 50% !important;
+
+    background-color: slategrey;
+
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+}
+
+#settings_page #logout_btn{
+    background: #F0FF49;
+    color: #FF3B30;
+    height: 75px;
+    width: 100%;
+    font-size: 1.5em;
+    margin-top:62%;
 }
 
 #user_data{
@@ -279,6 +333,22 @@ ul#friends_list_view{
     -moz-transition: -moz-transform 200ms ease !important;
     -o-transition: -moz-transform 200ms ease !important;
     transition: transform 200ms ease !important;
+}
+#search_page{
+    height: 100%;
+    margin: 0;
+    color:#FFFFFF;
+    background-color: #3B86CC;
+}
+#search_page ul li{
+    height:75px;
+    width:100%;
+    background-color: #FF3B30;
+    color:white;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 2em;
+    font-weight: 600;
 }
 
 button#add_friend_btn{

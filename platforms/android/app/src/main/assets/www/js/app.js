@@ -252,12 +252,16 @@ function onDeviceReady(){
 
         $('#setup_page').on('pageshow', (e) => {
             var file_num = Math.floor(Math.random()*3);
-            $('#profile_pic_input').css('background-image', 'url(../imgs/profile_pics/' + file_num + '.png)');
+            $('#profile_pic_input').css('background-image', 'url(./imgs/profile_pics/' + file_num + '.png)');
         });
 
         $('#settings_page').on('pageshow', (e) => {
             var file_num = Math.floor(Math.random()*3);
-            $('#change_profile_pic_input').css('background-image', 'url(../imgs/profile_pics/' + file_num + '.png)');
+            $('#profile_img').css('background-image', 'url(./imgs/profile_pics/' + file_num + '.png)')
+            var user = firebase.auth().currentUser;
+            if(user){
+                $('#profile_img').css('background-image', 'url(' + user.photoURL + ')');
+            }
         });
 
         $('#home_page').on('pageshow', (e) => {
@@ -274,7 +278,6 @@ function onDeviceReady(){
                 console.log(user.uid);
                 friends_ref = firebase.database().ref('users/' +  user.uid).child('friends');
                 friends_ref.once("value", (snapshot) => {
-                    console.log("hi");
                     $('#friends_list_view').html('');
                     snapshot.forEach((friend) => {
                         friend_name = friend.val().username;
@@ -312,32 +315,14 @@ function onDeviceReady(){
         $('#friends_list_view').on('vclick', 'li', (event) => {
             var friend_name = $('#' + event.target.id).attr('data-name');
             var friend_uid = $('#' + event.target.id).attr('data-uid');
-            navigator.notification.alert(
-                friend_uid,
-                ()=>{},
-                friend_name,
-                "Ok"
-            );
             //Get current location
             navigator.geolocation.getCurrentPosition((location)=>{
-                navigator.notification.alert(
-                    location.coords.longitude,
-                    ()=>{},
-                    location.coords.latitude,
-                    "Ok"
-                );
                 var location_str = location.coords.latitude + ";" + location.coords.longitude;
                 var location_obj = {
                     lat: location.coords.latitude,
                     lng: location.coords.longitude
                 };
                 //Success
-                navigator.notification.alert(
-                    location_str,
-                    ()=>{},
-                    "Location",
-                    "Ok"
-                );
                 //Send a message to a user
                 var locations_ref = firebase.database().ref().child('users').child(friend_uid).child('friends').child(firebase.auth().currentUser.uid).child('location');
                 locations_ref.set(location_obj, (error) => {
@@ -373,7 +358,7 @@ function onDeviceReady(){
                     "Error", // title
                     'Ok' // buttonName
                 );
-            });
+            }, { maximumAge: 3000, timeout: 5000, enableHighAccuracy: true });
         })
 
         $('#profile_btn').on('vclick', (event)=>{
@@ -458,10 +443,22 @@ function onDeviceReady(){
 
         $('#account_delete_btn').on('vclick', (e)=>{
             var uid = firebase.auth().currentUser.uid;
-            alert(uid);
-            // firebase.auth().currentUser.delete().then(()=>{
-            //     firebase.database().ref().child('users').child(uid).remove();
-            // });
+            firebase.database().ref('users').child(uid).child('friends').once("value", (snapshot) => {
+                //remove user from their friends friend lists
+                snapshot.forEach((friend) => {
+                    firebase.database().ref().child('users').child(friend.uid).child('friends').child(uid).remove();
+                });
+            });
+            firebase.database().ref('users').child(uid).remove();
+            firebase.auth().currentUser.delete().then(()=>{
+                navigator.notification.alert(
+                    "Your account has been deleted",
+                    ()=>{},
+                    "Account Deleted",
+                    "Ok"
+                );
+            });
+
         });
 
         $('#unfriend_btn').on('vclick', (e)=>{
@@ -469,9 +466,6 @@ function onDeviceReady(){
             var friend_uid = $('#unfriend_btn').attr('data-uid');
             firebase.database().ref().child('users').child(uid).child('friends').child(friend_uid).remove();
             $.mobile.changePage('#home_page');
-            // firebase.auth().currentUser.delete().then(()=>{
-            //     firebase.database().ref().child('users').child(uid).remove();
-            // });
         });
     }
 }

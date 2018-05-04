@@ -78,12 +78,6 @@ function onDeviceReady(){
             var password_input = $('#login_password_input');
             console.log(email_input.val());
             console.log(password_input.val());
-            navigator.notification.alert(
-                password_input.val(),
-                ()=>{},
-                email_input.val(),
-                "Login"
-            );
             firebase.auth().signInWithEmailAndPassword(email_input.val(), password_input.val()).catch((error) => {
                 console.log(error.code + ": " + error.message);
             });
@@ -252,12 +246,16 @@ function onDeviceReady(){
 
         $('#setup_page').on('pageshow', (e) => {
             var file_num = Math.floor(Math.random()*3);
-            $('#profile_pic_input').css('background-image', 'url(../imgs/profile_pics/' + file_num + '.png)');
+            $('#profile_pic_input').css('background-image', 'url(./imgs/profile_pics/' + file_num + '.png)');
         });
 
         $('#settings_page').on('pageshow', (e) => {
             var file_num = Math.floor(Math.random()*3);
-            $('#change_profile_pic_input').css('background-image', 'url(../imgs/profile_pics/' + file_num + '.png)');
+            $('#profile_img').css('background-image', 'url(./imgs/profile_pics/' + file_num + '.png)')
+            var user = firebase.auth().currentUser;
+            if(user){
+                $('#profile_img').css('background-image', 'url(' + user.photoURL + ')');
+            }
         });
 
         $('#home_page').on('pageshow', (e) => {
@@ -311,40 +309,14 @@ function onDeviceReady(){
         $('#friends_list_view').on('vclick', 'li', (event) => {
             var friend_name = $('#' + event.target.id).attr('data-name');
             var friend_uid = $('#' + event.target.id).attr('data-uid');
-            navigator.notification.alert(
-                friend_uid,
-                ()=>{},
-                friend_name,
-                "Ok"
-            );
-            navigator.notification.alert(
-                "Type = "+typeof(navigator.geolocation.getCurrentPosition),  // message
-                ()=>{
-                    //do nothing
-                }, // callback
-                "Location Stuff", // title
-                'Coolio' // buttonName
-            );
             //Get current location
             navigator.geolocation.getCurrentPosition((location)=>{
-                navigator.notification.alert(
-                    location.coords.longitude,
-                    ()=>{},
-                    location.coords.latitude,
-                    "Ok"
-                );
                 var location_str = location.coords.latitude + ";" + location.coords.longitude;
                 var location_obj = {
                     lat: location.coords.latitude,
                     lng: location.coords.longitude
                 };
                 //Success
-                navigator.notification.alert(
-                    location_str,
-                    ()=>{},
-                    "Location",
-                    "Ok"
-                );
                 //Send a message to a user
                 var locations_ref = firebase.database().ref().child('users').child(friend_uid).child('friends').child(firebase.auth().currentUser.uid).child('location');
                 locations_ref.set(location_obj, (error) => {
